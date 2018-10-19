@@ -1,13 +1,12 @@
 // -----------------------------------------------------------------------
 // <copyright file="InvoiceLineItemCollectionOperations.java" company="Microsoft">
-//      Copyright (c) Microsoft Corporation.  All rights reserved.
+//      Copyright (c) Microsoft Corporation. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
 
 package com.microsoft.store.partnercenter.invoices;
 
 import java.text.MessageFormat;
-import java.util.Locale;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.microsoft.store.partnercenter.BasePartnerComponentString;
@@ -26,17 +25,17 @@ public class InvoiceLineItemCollectionOperations
 	extends BasePartnerComponentString
 	implements IInvoiceLineItemCollection
 {
-    /***
+    /**
      * The provider of billing information.
      */
     private BillingProvider billingProvider;
 
-    /***
+    /**
      * The type of invoice line item.
      */
     private InvoiceLineItemType invoiceLineItemType;
 	
-	/***
+	/**
 	 * Initializes a new instance of the InvoiceLineItemCollectionOperations class.
 	 * 
 	 * @param rootPartnerOperations The partner operations.
@@ -67,7 +66,7 @@ public class InvoiceLineItemCollectionOperations
         this.invoiceLineItemType = invoiceLineItemType;
 	}
 
-	/***
+	/**
 	 * Retrieves invoice line items for a specific billing provider and invoice line item type 
 	 * 
 	 * @return The collection of invoice line items.
@@ -76,7 +75,7 @@ public class InvoiceLineItemCollectionOperations
 	public ResourceCollection<InvoiceLineItem> get()
 	{
         IPartnerServiceProxy<InvoiceLineItem, ResourceCollection<InvoiceLineItem>> partnerServiceProxy =
-                new PartnerServiceProxy<InvoiceLineItem, ResourceCollection<InvoiceLineItem>>( 
+                new PartnerServiceProxy<>( 
                     new TypeReference<ResourceCollection<InvoiceLineItem>>()
                     {
                     },
@@ -85,13 +84,12 @@ public class InvoiceLineItemCollectionOperations
                         PartnerService.getInstance().getConfiguration().getApis().get( "GetInvoiceLineItems" ).getPath(),
                         this.getContext(),
                         this.billingProvider, 
-                        this.invoiceLineItemType, 
-                        Locale.US ) );
+                        this.invoiceLineItemType ));
 
         return partnerServiceProxy.get();
 	}
 
-	/***
+	/**
 	 * Retrieves invoice line items for a specific billing provider and invoice line item type and allows paging
 	 * 
 	 * @return The collection of invoice line items.
@@ -108,8 +106,7 @@ public class InvoiceLineItemCollectionOperations
                     MessageFormat.format( 
                         PartnerService.getInstance().getConfiguration().getApis().get( "GetInvoiceLineItems" ).getPath(),
                         this.getContext(), this.billingProvider, 
-                        this.invoiceLineItemType, 
-                        Locale.US ) );
+                        this.invoiceLineItemType));
 
         partnerServiceProxy.getUriParameters().add( new KeyValuePair<String, String>( 
             PartnerService.getInstance().getConfiguration().getApis().get( "GetInvoiceLineItems" ).getParameters().get( "Size" ),

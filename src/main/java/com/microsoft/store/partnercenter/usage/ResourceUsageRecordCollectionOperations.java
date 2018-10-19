@@ -1,13 +1,12 @@
 // -----------------------------------------------------------------------
 // <copyright file="ResourceUsageRecordCollectionOperations.java" company="Microsoft">
-//      Copyright (c) Microsoft Corporation.  All rights reserved.
+//      Copyright (c) Microsoft Corporation. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
 
 package com.microsoft.store.partnercenter.usage;
 
 import java.text.MessageFormat;
-import java.util.Locale;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.microsoft.store.partnercenter.BasePartnerComponent;
@@ -38,6 +37,7 @@ public class ResourceUsageRecordCollectionOperations
                                                     String subscriptionId )
     {
         super( rootPartnerOperations, new Tuple<String, String>( customerId, subscriptionId ) );
+
         if ( StringHelper.isNullOrWhiteSpace( customerId ) )
         {
             throw new IllegalArgumentException( "customerId should be set." );
@@ -59,12 +59,15 @@ public class ResourceUsageRecordCollectionOperations
     public ResourceCollection<AzureResourceMonthlyUsageRecord> get()
     {
         IPartnerServiceProxy<AzureResourceMonthlyUsageRecord, ResourceCollection<AzureResourceMonthlyUsageRecord>> partnerServiceProxy =
-            new PartnerServiceProxy<AzureResourceMonthlyUsageRecord, ResourceCollection<AzureResourceMonthlyUsageRecord>>( new TypeReference<ResourceCollection<AzureResourceMonthlyUsageRecord>>()
+            new PartnerServiceProxy<>( new TypeReference<ResourceCollection<AzureResourceMonthlyUsageRecord>>()
             {
-            }, this.getPartner(), MessageFormat.format( PartnerService.getInstance().getConfiguration().getApis().get( "GetSubscriptionResourceUsageRecords" ).getPath(),
-                                                        this.getContext().getItem1(), this.getContext().getItem2(),
-                                                        Locale.US ) );
+            }, 
+            this.getPartner(), 
+            MessageFormat.format( 
+                PartnerService.getInstance().getConfiguration().getApis().get( "GetSubscriptionResourceUsageRecords" ).getPath(),
+                    this.getContext().getItem1(), 
+                    this.getContext().getItem2()));
+
         return partnerServiceProxy.get();
     }
-
 }

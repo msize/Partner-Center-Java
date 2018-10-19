@@ -1,13 +1,10 @@
 // -----------------------------------------------------------------------
 // <copyright file="CustomerUsageRecordCollectionOperations.java" company="Microsoft">
-//      Copyright (c) Microsoft Corporation.  All rights reserved.
+//      Copyright (c) Microsoft Corporation. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
 
 package com.microsoft.store.partnercenter.usage;
-
-import java.text.MessageFormat;
-import java.util.Locale;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.microsoft.store.partnercenter.BasePartnerComponentString;
@@ -44,11 +41,12 @@ public class CustomerUsageRecordCollectionOperations
     public ResourceCollection<CustomerMonthlyUsageRecord> get()
     {
         IPartnerServiceProxy<CustomerMonthlyUsageRecord, ResourceCollection<CustomerMonthlyUsageRecord>> partnerServiceProxy =
-            new PartnerServiceProxy<CustomerMonthlyUsageRecord, ResourceCollection<CustomerMonthlyUsageRecord>>( new TypeReference<ResourceCollection<CustomerMonthlyUsageRecord>>()
+            new PartnerServiceProxy<>( new TypeReference<ResourceCollection<CustomerMonthlyUsageRecord>>()
             {
-            }, this.getPartner(), MessageFormat.format( PartnerService.getInstance().getConfiguration().getApis().get( "GetCustomerUsageRecords" ).getPath(),
-                                                        Locale.US ) );
+            }, 
+            this.getPartner(), 
+            PartnerService.getInstance().getConfiguration().getApis().get( "GetCustomerUsageRecords" ).getPath());
+
         return partnerServiceProxy.get();
     }
-
 }

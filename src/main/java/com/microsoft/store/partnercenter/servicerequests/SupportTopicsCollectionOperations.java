@@ -1,13 +1,10 @@
 // -----------------------------------------------------------------------
 // <copyright file="SupportTopicsCollectionOperations.java" company="Microsoft">
-//      Copyright (c) Microsoft Corporation.  All rights reserved.
+//      Copyright (c) Microsoft Corporation. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
 
 package com.microsoft.store.partnercenter.servicerequests;
-
-import java.text.MessageFormat;
-import java.util.Locale;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.microsoft.store.partnercenter.BasePartnerComponentString;
@@ -44,12 +41,12 @@ public class SupportTopicsCollectionOperations
     public ResourceCollection<SupportTopic> get()
     {
         IPartnerServiceProxy<SupportTopic, ResourceCollection<SupportTopic>> partnerServiceProxy =
-            new PartnerServiceProxy<SupportTopic, ResourceCollection<SupportTopic>>( new TypeReference<ResourceCollection<SupportTopic>>()
+            new PartnerServiceProxy<>( new TypeReference<ResourceCollection<SupportTopic>>()
             {
-            }, this.getPartner(), MessageFormat.format( PartnerService.getInstance().getConfiguration().getApis().get( "GetServiceRequestSupportTopics" ).getPath(),
-                                                        Locale.US ) );
+            }, 
+            this.getPartner(), 
+            PartnerService.getInstance().getConfiguration().getApis().get( "GetServiceRequestSupportTopics" ).getPath());
 
         return partnerServiceProxy.get();
     }
-
 }

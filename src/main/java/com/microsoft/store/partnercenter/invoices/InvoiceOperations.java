@@ -1,13 +1,12 @@
 // -----------------------------------------------------------------------
 // <copyright file="InvoiceOperations.java" company="Microsoft">
-//      Copyright (c) Microsoft Corporation.  All rights reserved.
+//      Copyright (c) Microsoft Corporation. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
 
 package com.microsoft.store.partnercenter.invoices;
 
 import java.text.MessageFormat;
-import java.util.Locale;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.microsoft.store.partnercenter.BasePartnerComponentString;
@@ -42,7 +41,7 @@ public class InvoiceOperations
         }
     }
 
-	/***
+	/**
 	 * Gets an invoice documents operations.
 	 */
     @Override
@@ -51,7 +50,7 @@ public class InvoiceOperations
     	return new InvoiceDocumentsOperations( this.getPartner(), this.getContext() );
 	}
 
-    /***
+    /**
      * Creates an invoice line item collection operation given a billing provider and invoice line item type.
      * 
      * @param billingProvider The billing provider.
@@ -72,13 +71,12 @@ public class InvoiceOperations
     public Invoice get()
     {
         IPartnerServiceProxy<Invoice, Invoice> partnerServiceProxy =
-            new PartnerServiceProxy<Invoice, Invoice>( new TypeReference<Invoice>()
+            new PartnerServiceProxy<>( new TypeReference<Invoice>()
             {
             }, 
             this.getPartner(), MessageFormat.format( 
                 PartnerService.getInstance().getConfiguration().getApis().get( "GetInvoice" ).getPath(),
-                this.getContext(),
-                Locale.US ) );
+                this.getContext()));
 
         return partnerServiceProxy.get();
     }

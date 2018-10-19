@@ -1,13 +1,10 @@
 // -----------------------------------------------------------------------
 // <copyright file="SupportProfileOperations.java" company="Microsoft">
-//      Copyright (c) Microsoft Corporation.  All rights reserved.
+//      Copyright (c) Microsoft Corporation. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
 
 package com.microsoft.store.partnercenter.profiles;
-
-import java.text.MessageFormat;
-import java.util.Locale;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.microsoft.store.partnercenter.BasePartnerComponentString;
@@ -43,10 +40,11 @@ public class SupportProfileOperations
     public SupportProfile get()
     {
         IPartnerServiceProxy<SupportProfile, SupportProfile> partnerServiceProxy =
-            new PartnerServiceProxy<SupportProfile, SupportProfile>( new TypeReference<SupportProfile>()
+            new PartnerServiceProxy<>( new TypeReference<SupportProfile>()
             {
-            }, this.getPartner(), MessageFormat.format( PartnerService.getInstance().getConfiguration().getApis().get( "GetSupportProfile" ).getPath(),
-                                                        Locale.US ) );
+            },
+            this.getPartner(), 
+            PartnerService.getInstance().getConfiguration().getApis().get( "GetSupportProfile" ).getPath());
 
         return partnerServiceProxy.get();
     }
@@ -61,12 +59,12 @@ public class SupportProfileOperations
     public SupportProfile update( SupportProfile updatePayload )
     {
         IPartnerServiceProxy<SupportProfile, SupportProfile> partnerServiceProxy =
-            new PartnerServiceProxy<SupportProfile, SupportProfile>( new TypeReference<SupportProfile>()
+            new PartnerServiceProxy<>( new TypeReference<SupportProfile>()
             {
-            }, this.getPartner(), MessageFormat.format( PartnerService.getInstance().getConfiguration().getApis().get( "UpdateSupportProfile" ).getPath(),
-                                                        Locale.US ) );
+            }, 
+            this.getPartner(),
+            PartnerService.getInstance().getConfiguration().getApis().get( "UpdateSupportProfile" ).getPath());
 
         return partnerServiceProxy.put( updatePayload );
     }
-
 }

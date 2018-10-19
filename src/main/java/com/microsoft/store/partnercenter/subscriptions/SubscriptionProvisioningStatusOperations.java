@@ -1,13 +1,12 @@
 // -----------------------------------------------------------------------
 // <copyright file="SubscriptionProvisioningStatusOperations.java" company="Microsoft">
-//      Copyright (c) Microsoft Corporation.  All rights reserved.
+//      Copyright (c) Microsoft Corporation. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
 
 package com.microsoft.store.partnercenter.subscriptions;
 
 import java.text.MessageFormat;
-import java.util.Locale;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.microsoft.store.partnercenter.BasePartnerComponent;
@@ -56,15 +55,15 @@ public class SubscriptionProvisioningStatusOperations
     public SubscriptionProvisioningStatus get()
     {
         IPartnerServiceProxy<SubscriptionProvisioningStatus, SubscriptionProvisioningStatus> partnerServiceProxy =
-            new PartnerServiceProxy<SubscriptionProvisioningStatus, SubscriptionProvisioningStatus>(
+            new PartnerServiceProxy<>(
                 new TypeReference<SubscriptionProvisioningStatus>()
                 {
                 }, 
                 this.getPartner(), 
                 MessageFormat.format(
                     PartnerService.getInstance().getConfiguration().getApis().get( "GetSubscriptionProvisioningStatus" ).getPath(),
-                    this.getContext().getItem1(), this.getContext().getItem2(),
-                    Locale.US ) );
+                    this.getContext().getItem1(), 
+                    this.getContext().getItem2()));
 
         return partnerServiceProxy.get();
     }

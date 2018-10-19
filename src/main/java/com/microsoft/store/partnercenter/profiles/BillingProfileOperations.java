@@ -1,13 +1,10 @@
 // -----------------------------------------------------------------------
 // <copyright file="BillingProfileOperations.java" company="Microsoft">
-//      Copyright (c) Microsoft Corporation.  All rights reserved.
+//      Copyright (c) Microsoft Corporation. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
 
 package com.microsoft.store.partnercenter.profiles;
-
-import java.text.MessageFormat;
-import java.util.Locale;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.microsoft.store.partnercenter.BasePartnerComponentString;
@@ -43,10 +40,11 @@ public class BillingProfileOperations
     public BillingProfile get()
     {
         IPartnerServiceProxy<BillingProfile, BillingProfile> partnerServiceProxy =
-            new PartnerServiceProxy<BillingProfile, BillingProfile>( new TypeReference<BillingProfile>()
+            new PartnerServiceProxy<>( new TypeReference<BillingProfile>()
             {
-            }, this.getPartner(), MessageFormat.format( PartnerService.getInstance().getConfiguration().getApis().get( "GetPartnerBillingProfile" ).getPath(),
-                                                        Locale.US ) );
+            }, 
+            this.getPartner(), 
+            PartnerService.getInstance().getConfiguration().getApis().get( "GetPartnerBillingProfile" ).getPath());
 
         return partnerServiceProxy.get();
     }
@@ -63,10 +61,10 @@ public class BillingProfileOperations
         IPartnerServiceProxy<BillingProfile, BillingProfile> partnerServiceProxy =
             new PartnerServiceProxy<BillingProfile, BillingProfile>( new TypeReference<BillingProfile>()
             {
-            }, this.getPartner(), MessageFormat.format( PartnerService.getInstance().getConfiguration().getApis().get( "UpdatePartnerBillingProfile" ).getPath(),
-                                                        Locale.US ) );
+            }, 
+            this.getPartner(), 
+            PartnerService.getInstance().getConfiguration().getApis().get( "UpdatePartnerBillingProfile" ).getPath());
 
         return partnerServiceProxy.put( updatePayload );
     }
-
 }

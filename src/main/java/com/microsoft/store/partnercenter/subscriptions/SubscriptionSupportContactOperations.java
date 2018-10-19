@@ -1,13 +1,12 @@
 // -----------------------------------------------------------------------
 // <copyright file="SubscriptionSupportContactOperations.java" company="Microsoft">
-//      Copyright (c) Microsoft Corporation.  All rights reserved.
+//      Copyright (c) Microsoft Corporation. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
 
 package com.microsoft.store.partnercenter.subscriptions;
 
 import java.text.MessageFormat;
-import java.util.Locale;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.microsoft.store.partnercenter.BasePartnerComponent;
@@ -56,15 +55,15 @@ public class SubscriptionSupportContactOperations
     public SupportContact get()
     {
         IPartnerServiceProxy<SupportContact, SupportContact> partnerServiceProxy =
-            new PartnerServiceProxy<SupportContact, SupportContact>(
+            new PartnerServiceProxy<>(
                 new TypeReference<SupportContact>()
                 {
                 }, 
                 this.getPartner(), 
                 MessageFormat.format(
                     PartnerService.getInstance().getConfiguration().getApis().get( "GetSubscriptionSupportContact" ).getPath(),
-                    this.getContext().getItem1(), this.getContext().getItem2(),
-                    Locale.US ) );
+                    this.getContext().getItem1(), 
+                    this.getContext().getItem2()));
 
         return partnerServiceProxy.get();
     }
@@ -78,15 +77,15 @@ public class SubscriptionSupportContactOperations
     public SupportContact update(SupportContact supportContact)
     {
         IPartnerServiceProxy<SupportContact, SupportContact> partnerServiceProxy =
-        new PartnerServiceProxy<SupportContact, SupportContact>(
+        new PartnerServiceProxy<>(
             new TypeReference<SupportContact>()
             {
             }, 
             this.getPartner(), 
             MessageFormat.format(
                 PartnerService.getInstance().getConfiguration().getApis().get( "UpdateSubscriptionSupportContact" ).getPath(),
-                this.getContext().getItem1(), this.getContext().getItem2(),
-                Locale.US ) );
+                this.getContext().getItem1(), 
+                this.getContext().getItem2()));
 
         return partnerServiceProxy.put(supportContact);
     }

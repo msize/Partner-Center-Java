@@ -1,6 +1,6 @@
 // -----------------------------------------------------------------------
 // <copyright file="DefaultPartnerServiceErrorHandler.java" company="Microsoft">
-//      Copyright (c) Microsoft Corporation.  All rights reserved.
+//      Copyright (c) Microsoft Corporation. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
 
@@ -8,7 +8,6 @@ package com.microsoft.store.partnercenter.errorhandling;
 
 import java.io.IOException;
 import java.text.MessageFormat;
-import java.util.Locale;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.microsoft.store.partnercenter.exception.PartnerErrorCategory;
@@ -76,7 +75,7 @@ public class DefaultPartnerServiceErrorHandler
         PartnerException partnerException = null;
 
         // log the failed response
-        String errorMessage = MessageFormat.format( "Partner service failed response:{0}", responsePayload, Locale.US );
+        String errorMessage = MessageFormat.format( "Partner service failed response:{0}", responsePayload );
         PartnerLog.getInstance().logError( errorMessage );
 
         // attempt to deserialize the response into an ApiFault object as this is what the partner service is
@@ -88,7 +87,7 @@ public class DefaultPartnerServiceErrorHandler
         }
         catch ( IOException e )
         {
-            // LogManager.Instance.Error( "Could not parse error response: " + deserializationProblem.toString() );
+            PartnerLog.getInstance().logError("Could not parse error response: " + e.toString() );
         }
 
         PartnerErrorCategory errorCategory;
@@ -109,7 +108,8 @@ public class DefaultPartnerServiceErrorHandler
      */
     private static PartnerErrorCategory toPartnerErrorCategory( int statusCode )
     {
-        PartnerErrorCategory errorCategory = PartnerErrorCategory.NOT_SPECIFIED;
+        PartnerErrorCategory errorCategory;
+        
         switch ( statusCode )
         {
             case HttpStatusCode.BadRequest:
@@ -134,6 +134,7 @@ public class DefaultPartnerServiceErrorHandler
                 errorCategory = PartnerErrorCategory.SERVER_ERROR;
                 break;
         }
+
         return errorCategory;
     }
 }

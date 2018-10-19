@@ -1,13 +1,12 @@
 // -----------------------------------------------------------------------
 // <copyright file="SubscriptionOperations.java" company="Microsoft">
-//      Copyright (c) Microsoft Corporation.  All rights reserved.
+//      Copyright (c) Microsoft Corporation. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
 
 package com.microsoft.store.partnercenter.subscriptions;
 
 import java.text.MessageFormat;
-import java.util.Locale;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.microsoft.store.partnercenter.BasePartnerComponent;
@@ -46,7 +45,7 @@ public class SubscriptionOperations
      */
     private ISubscriptionUpgradeCollection subscriptionUpgradeOperations;
     
-    /***
+    /**
      * A reference to the current subscription's resource usage records operations.
      */
     private ISubscriptionUsageRecordCollection usageRecordsOperations;
@@ -56,32 +55,32 @@ public class SubscriptionOperations
      */
     private ISubscriptionUsageSummary subscriptionUsageSummaryOperations;
     
-    /***
+    /**
      * A reference to the current subscription's utilities operations.
      */
     private IUtilizationCollection subscriptionUtilizationOperations;
 
-    /***
+    /**
      * A reference to the current subscription's provisioning status operations.
      */
     private ISubscriptionProvisioningStatus subscriptionProvisioningStatusOperations;
 
-    /***
+    /**
      * A reference to the current subscription's support contact operations.
      */
     private ISubscriptionSupportContact subscriptionSupportContactOperations;
 
-    /***
+    /**
      * A reference to the current subscription's registration status operations.
      */
     private ISubscriptionRegistration subscriptionRegistrationOperations;
 
-    /***
+    /**
      * A reference to the current subscription's registration status operations.
      */
     private ISubscriptionRegistrationStatus subscriptionRegistrationStatusOperations; 
 
-    /***
+    /**
      * A lazy reference to the current subscription's conversion operations.
      */
     private ISubscriptionConversionCollection subscriptionConversionOperations; 
@@ -179,7 +178,7 @@ public class SubscriptionOperations
         return this.subscriptionUtilizationOperations;
     }
 
-    /***
+    /**
      * Gets the current subscription's provisioning status operations.
      */
     public ISubscriptionProvisioningStatus getProvisioningStatus()
@@ -192,7 +191,7 @@ public class SubscriptionOperations
         return subscriptionProvisioningStatusOperations;
     }
 
-    /***
+    /**
      * Gets the current subscription's support contact operations.
      */
     public ISubscriptionSupportContact getSupportContact()
@@ -205,7 +204,7 @@ public class SubscriptionOperations
         return subscriptionSupportContactOperations; 
     }
 
-    /***
+    /**
      * Gets the current subscription's registration operations.
      */
     public ISubscriptionRegistration getRegistration()
@@ -218,7 +217,7 @@ public class SubscriptionOperations
         return subscriptionRegistrationOperations;
     }
 
-    /***
+    /**
      * Gets the current subscription's registration status operations.
      */
     public ISubscriptionRegistrationStatus getRegistrationStatus()
@@ -252,9 +251,13 @@ public class SubscriptionOperations
         IPartnerServiceProxy<Subscription, Subscription> partnerServiceProxy =
             new PartnerServiceProxy<Subscription, Subscription>( new TypeReference<Subscription>()
             {
-            }, this.getPartner(), MessageFormat.format( PartnerService.getInstance().getConfiguration().getApis().get( "GetSubscription" ).getPath(),
-                                                        this.getContext().getItem1(), this.getContext().getItem2(),
-                                                        Locale.US ) );
+            }, 
+            this.getPartner(), 
+            MessageFormat.format( 
+                PartnerService.getInstance().getConfiguration().getApis().get( "GetSubscription" ).getPath(),
+                this.getContext().getItem1(), 
+                this.getContext().getItem2()));
+
         return partnerServiceProxy.get();
     }
 
@@ -272,12 +275,15 @@ public class SubscriptionOperations
             throw new IllegalArgumentException( "subscription is required." );
         }
         PartnerServiceProxy<Subscription, Subscription> partnerApiServiceProxy =
-            new PartnerServiceProxy<Subscription, Subscription>( new TypeReference<Subscription>()
+            new PartnerServiceProxy<>( new TypeReference<Subscription>()
             {
-            }, this.getPartner(), MessageFormat.format( PartnerService.getInstance().getConfiguration().getApis().get( "UpdateSubscription" ).getPath(),
-                                                        this.getContext().getItem1(), this.getContext().getItem2(),
-                                                        Locale.US ) );
+            }, 
+            this.getPartner(), 
+            MessageFormat.format( 
+                PartnerService.getInstance().getConfiguration().getApis().get( "UpdateSubscription" ).getPath(),
+                this.getContext().getItem1(), 
+                this.getContext().getItem2()));
+
         return partnerApiServiceProxy.patch( subscription );
     }
-
 }

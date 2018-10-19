@@ -1,13 +1,10 @@
 // -----------------------------------------------------------------------
 // <copyright file="PartnerUsageSummaryOperations.java" company="Microsoft">
-//      Copyright (c) Microsoft Corporation.  All rights reserved.
+//      Copyright (c) Microsoft Corporation. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
 
 package com.microsoft.store.partnercenter.usage;
-
-import java.text.MessageFormat;
-import java.util.Locale;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.microsoft.store.partnercenter.BasePartnerComponentString;
@@ -43,12 +40,12 @@ public class PartnerUsageSummaryOperations
     public PartnerUsageSummary get()
     {
         IPartnerServiceProxy<PartnerUsageSummary, PartnerUsageSummary> partnerServiceProxy =
-            new PartnerServiceProxy<PartnerUsageSummary, PartnerUsageSummary>( new TypeReference<PartnerUsageSummary>()
+            new PartnerServiceProxy<>( new TypeReference<PartnerUsageSummary>()
             {
-            }, this.getPartner(), MessageFormat.format( PartnerService.getInstance().getConfiguration().getApis().get( "GetPartnerUsageSummary" ).getPath(),
-                                                        Locale.US ) );
+            }, 
+            this.getPartner(), 
+            PartnerService.getInstance().getConfiguration().getApis().get( "GetPartnerUsageSummary" ).getPath());
 
         return partnerServiceProxy.get();
     }
-
 }

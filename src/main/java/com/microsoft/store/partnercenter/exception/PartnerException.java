@@ -1,13 +1,12 @@
 // -----------------------------------------------------------------------
 // <copyright file="PartnerException.java" company="Microsoft">
-//      Copyright (c) Microsoft Corporation.  All rights reserved.
+//      Copyright (c) Microsoft Corporation. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
 
 package com.microsoft.store.partnercenter.exception;
 
 import java.text.MessageFormat;
-import java.util.Locale;
 
 import com.microsoft.store.partnercenter.models.ApiFault;
 import com.microsoft.store.partnercenter.requestcontext.IRequestContext;
@@ -158,10 +157,10 @@ public class PartnerException
     public String toString()
     {
         return MessageFormat.format( "PartnerException: ErrorCategory: {0}, ServiceErrorPayload: {1}, Context: {2}, Base Description: {3}",
-                                     this.getErrorCategory().toString(), this.getServiceErrorPayload() != null
-                                                     ? this.getServiceErrorPayload().toString() : "null",
-                                     this.getContext(), super.toString(), Locale.US );
+                                     this.getErrorCategory(), 
+                                     this.getServiceErrorPayload() != null ? this.getServiceErrorPayload().toString() : "null",
+                                     this.getContext(), 
+                                     super.toString() );
 
     }
-
 }

@@ -1,13 +1,12 @@
 // -----------------------------------------------------------------------
 // <copyright file="SubscriptionRegistrationOperations.java" company="Microsoft">
-//      Copyright (c) Microsoft Corporation.  All rights reserved.
+//      Copyright (c) Microsoft Corporation. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
 
 package com.microsoft.store.partnercenter.subscriptions;
 
 import java.text.MessageFormat;
-import java.util.Locale;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.microsoft.store.partnercenter.BasePartnerComponent;
@@ -57,15 +56,15 @@ public class SubscriptionRegistrationOperations
     public String register()
     {
         IPartnerServiceProxy<String, HttpResponse> partnerServiceProxy =
-            new PartnerServiceProxy<String, HttpResponse>(
+            new PartnerServiceProxy<>(
                 new TypeReference<HttpResponse>()
                 {
                 }, 
                 this.getPartner(), 
                 MessageFormat.format(
                     PartnerService.getInstance().getConfiguration().getApis().get( "UpdateSubscriptionRegistrationStatus" ).getPath(),
-                    this.getContext().getItem1(), this.getContext().getItem2(),
-                    Locale.US ) );
+                    this.getContext().getItem1(), 
+                    this.getContext().getItem2()));
 
         HttpResponse response = partnerServiceProxy.post("success");
 

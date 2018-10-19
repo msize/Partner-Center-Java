@@ -1,13 +1,12 @@
 // -----------------------------------------------------------------------
 // <copyright file="SubscriptionDailyUsageRecordCollectionOperations.java" company="Microsoft">
-//      Copyright (c) Microsoft Corporation.  All rights reserved.
+//      Copyright (c) Microsoft Corporation. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
 
 package com.microsoft.store.partnercenter.usage;
 
 import java.text.MessageFormat;
-import java.util.Locale;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.microsoft.store.partnercenter.BasePartnerComponent;
@@ -37,6 +36,7 @@ public class SubscriptionDailyUsageRecordCollectionOperations
                                                              String customerId, String subscriptionId )
     {
         super( rootPartnerOperations, new Tuple<String, String>( customerId, subscriptionId ) );
+
         if ( StringHelper.isNullOrWhiteSpace( customerId ) )
         {
             throw new IllegalArgumentException( "customerId should be set." );
@@ -46,7 +46,6 @@ public class SubscriptionDailyUsageRecordCollectionOperations
         {
             throw new IllegalArgumentException( "subscriptionId should be set." );
         }
-
     }
 
     /**
@@ -58,12 +57,15 @@ public class SubscriptionDailyUsageRecordCollectionOperations
     public ResourceCollection<SubscriptionDailyUsageRecord> get()
     {
         PartnerServiceProxy<SubscriptionDailyUsageRecord, ResourceCollection<SubscriptionDailyUsageRecord>> partnerServiceProxy =
-            new PartnerServiceProxy<SubscriptionDailyUsageRecord, ResourceCollection<SubscriptionDailyUsageRecord>>( new TypeReference<ResourceCollection<SubscriptionDailyUsageRecord>>()
+            new PartnerServiceProxy<>( new TypeReference<ResourceCollection<SubscriptionDailyUsageRecord>>()
             {
-            }, this.getPartner(), MessageFormat.format( PartnerService.getInstance().getConfiguration().getApis().get( "GetSubscriptionDailyUsageRecords" ).getPath(),
-                                                        this.getContext().getItem1(), this.getContext().getItem2(),
-                                                        Locale.US ) );
+            }, 
+            this.getPartner(),
+            MessageFormat.format( 
+                PartnerService.getInstance().getConfiguration().getApis().get( "GetSubscriptionDailyUsageRecords" ).getPath(),
+                this.getContext().getItem1(), 
+                this.getContext().getItem2()));
+
         return partnerServiceProxy.get();
     }
-
 }

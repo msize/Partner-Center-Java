@@ -1,13 +1,12 @@
 // -----------------------------------------------------------------------
 // <copyright file="SimpleFieldFilter.java" company="Microsoft">
-//      Copyright (c) Microsoft Corporation.  All rights reserved.
+//      Copyright (c) Microsoft Corporation. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
 
 package com.microsoft.store.partnercenter.models.query.filters;
 
 import java.text.MessageFormat;
-import java.util.Locale;
 
 /**
  * A simple filter applied to a field. An example is (Year lessThan 1999).
@@ -66,7 +65,7 @@ public class SimpleFieldFilter
     /**
      * Gets or sets the filtered field name.
      */
-    private String __Field = new String();
+    private String __Field;
 
     public String getField()
     {
@@ -81,7 +80,7 @@ public class SimpleFieldFilter
     /**
      * Gets or sets the filter value.
      */
-    private String __Value = new String();
+    private String __Value;
 
     public String getValue()
     {
@@ -121,8 +120,10 @@ public class SimpleFieldFilter
      */
     public String toString()
     {
-        return MessageFormat.format( "( {0} {1} {2} )", this.getField(), this.getOperator(), this.getValue(),
-                                     Locale.US );
+        return MessageFormat.format(
+             "( {0} {1} {2} )", 
+             this.getField(), 
+             this.getOperator(), 
+             this.getValue());
     }
-
 }

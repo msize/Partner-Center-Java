@@ -1,13 +1,10 @@
 // -----------------------------------------------------------------------
 // <copyright file="OfferCategoryCollectionOperations.java" company="Microsoft">
-//      Copyright (c) Microsoft Corporation.  All rights reserved.
+//      Copyright (c) Microsoft Corporation. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
 
 package com.microsoft.store.partnercenter.offers;
-
-import java.text.MessageFormat;
-import java.util.Locale;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.microsoft.store.partnercenter.BasePartnerComponentString;
@@ -49,15 +46,17 @@ public class OfferCategoryCollectionOperations
     public ResourceCollection<OfferCategory> get()
     {
         IPartnerServiceProxy<OfferCategory, ResourceCollection<OfferCategory>> partnerServiceProxy =
-            new PartnerServiceProxy<OfferCategory, ResourceCollection<OfferCategory>>( new TypeReference<ResourceCollection<OfferCategory>>()
+            new PartnerServiceProxy<>( new TypeReference<ResourceCollection<OfferCategory>>()
             {
-            }, this.getPartner(), MessageFormat.format( PartnerService.getInstance().getConfiguration().getApis().get( "GetOfferCategories" ).getPath(),
-                                                        Locale.US ) );
+            }, 
+            this.getPartner(), 
+            PartnerService.getInstance().getConfiguration().getApis().get( "GetOfferCategories" ).getPath());
 
-        partnerServiceProxy.getUriParameters().add( new KeyValuePair<String, String>( PartnerService.getInstance().getConfiguration().getApis().get( "GetOfferCategories" ).getParameters().get( "Country" ),
-                                                                                      this.getContext() ) );
+        partnerServiceProxy.getUriParameters().add( 
+            new KeyValuePair<String, String>( 
+                PartnerService.getInstance().getConfiguration().getApis().get( "GetOfferCategories" ).getParameters().get( "Country" ),
+                this.getContext() ) );
 
         return partnerServiceProxy.get();
     }
-
 }
