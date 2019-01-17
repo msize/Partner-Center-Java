@@ -7,7 +7,6 @@
 package com.microsoft.store.partnercenter.domains;
 
 import java.text.MessageFormat;
-import java.util.Locale;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.microsoft.store.partnercenter.BasePartnerComponentString;
@@ -15,8 +14,6 @@ import com.microsoft.store.partnercenter.IPartner;
 import com.microsoft.store.partnercenter.PartnerService;
 import com.microsoft.store.partnercenter.exception.PartnerErrorCategory;
 import com.microsoft.store.partnercenter.exception.PartnerException;
-import com.microsoft.store.partnercenter.network.IPartnerServiceProxy;
-import com.microsoft.store.partnercenter.network.PartnerServiceProxy;
 
 public class DomainOperations extends BasePartnerComponentString implements IDomain
  {
@@ -29,6 +26,7 @@ public class DomainOperations extends BasePartnerComponentString implements IDom
 	protected DomainOperations( IPartner rootPartnerOperations, String domain )
 	{
 		super( rootPartnerOperations, domain );
+		
 		if( domain == null || domain.trim().isEmpty() )
 		{
 			throw new IllegalArgumentException( "Domain string cannot be null or empty" );
@@ -42,30 +40,26 @@ public class DomainOperations extends BasePartnerComponentString implements IDom
 	 */
 	@Override
 	public boolean exists()
-    {
-        IPartnerServiceProxy<String, String> partnerServiceProxy =
-                new PartnerServiceProxy<>( new TypeReference<String>()
-                {
-				}, 
-				this.getPartner(), 
+	{
+		try
+		{
+			this.getPartner().getServiceClient().head(
+				this.getPartner(),
+				new TypeReference<String>(){}, 
 				MessageFormat.format( 
-					PartnerService.getInstance().getConfiguration().getApis().get( "CheckDomainAvailability" ).getPath(),
-					this.getContext() ) );
-        
-        try
-        {
-        	partnerServiceProxy.head();
-        }
-        catch( PartnerException ex )
-        {
-        	if( ex.getErrorCategory().equals( PartnerErrorCategory.NOT_FOUND ) )
-        	{
-        		return false;
-        	}
-        	
-        	throw ex;
-        }
-        
-        return true;
+					PartnerService.getInstance().getConfiguration().getApis().get("CheckDomainAvailability").getPath(),
+					this.getContext()));
+		}
+		catch( PartnerException ex )
+		{
+			if( ex.getErrorCategory().equals( PartnerErrorCategory.NOT_FOUND ) )
+			{
+				return false;
+			}
+			
+			throw ex;
+		}
+		
+		return true;
 	}
 }

@@ -14,7 +14,6 @@ import com.microsoft.store.partnercenter.IPartner;
 import com.microsoft.store.partnercenter.PartnerService;
 import com.microsoft.store.partnercenter.models.ResourceCollection;
 import com.microsoft.store.partnercenter.models.agreements.Agreement;
-import com.microsoft.store.partnercenter.network.PartnerServiceProxy;
 import com.microsoft.store.partnercenter.utils.StringHelper;
 
 /**
@@ -33,6 +32,7 @@ public class CustomerAgreementCollectionOperations
     public CustomerAgreementCollectionOperations( IPartner rootPartnerOperations, String customerId )
     {
         super( rootPartnerOperations, customerId );
+
         if ( StringHelper.isNullOrWhiteSpace( customerId ) )
         {
             throw new IllegalArgumentException( "customerId must be set" );
@@ -54,9 +54,13 @@ public class CustomerAgreementCollectionOperations
             throw new IllegalArgumentException( "Agreement can't be null." );
         }
 
-        return new PartnerServiceProxy<Agreement, Agreement>( new TypeReference<Agreement>() {}, this.getPartner(),
-                MessageFormat.format( PartnerService.getInstance().getConfiguration().getApis()
-                        .get( "CreateCustomerAgreement" ).getPath(), this.getContext() ) ).post( newAgreement );
+        return this.getPartner().getServiceClient().post(
+            this.getPartner(), 
+            new TypeReference<Agreement>(){},
+            MessageFormat.format(
+                PartnerService.getInstance().getConfiguration().getApis().get("CreateCustomerAgreement").getPath(),
+                this.getContext()),
+            newAgreement);
     }
 
     /**
@@ -67,10 +71,11 @@ public class CustomerAgreementCollectionOperations
     @Override
     public ResourceCollection<Agreement> get()
     {
-        return new PartnerServiceProxy<Agreement, ResourceCollection<Agreement>>(
-                new TypeReference<ResourceCollection<Agreement>>() {}, this.getPartner(),
-                MessageFormat.format( PartnerService.getInstance().getConfiguration().getApis()
-                                .get( "GetCustomerAgreements" ).getPath(),
-                        this.getContext() ) ).get();
+        return this.getPartner().getServiceClient().get(
+            this.getPartner(), 
+            new TypeReference<ResourceCollection<Agreement>>(){},
+            MessageFormat.format(
+                PartnerService.getInstance().getConfiguration().getApis().get( "GetCustomerAgreements" ).getPath(),
+                this.getContext()));
     }
 }
