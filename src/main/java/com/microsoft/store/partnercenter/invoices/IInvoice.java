@@ -53,7 +53,7 @@ public interface IInvoice
      * 
      * @return The available invoice line item collection operations given a billing provider and invoice line item type.
      */
-    IReconLineItemCollection By(BillingProvider provider, InvoiceLineItemType invoiceLineItemType, String currencyCode, BillingPeriod period);
+    IReconciliationLineItemCollection By(BillingProvider provider, InvoiceLineItemType invoiceLineItemType, String currencyCode, BillingPeriod period);
 
     /**
      * Creates an invoice line item collection operations given a billing provider and invoice line item type.
@@ -66,5 +66,5 @@ public interface IInvoice
      * 
      * @return The available invoice line item collection operations given a billing provider and invoice line item type.
      */
-    IReconLineItemCollection By(BillingProvider provider, InvoiceLineItemType invoiceLineItemType, String currencyCode, BillingPeriod period, int pageSize);
+    IReconciliationLineItemCollection By(BillingProvider provider, InvoiceLineItemType invoiceLineItemType, String currencyCode, BillingPeriod period, int pageSize);
 }

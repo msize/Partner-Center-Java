@@ -201,7 +201,12 @@ public enum OperationType
 	/**
      * An invoice is ready.
      */
-    READY_INVOICE("ready_invoice");
+    READY_INVOICE("ready_invoice"), 
+    
+    /**
+     * A new agreement has been created.
+     */
+    CREATE_AGREEMENT("create_agreement");
 
     private final String value;
 

@@ -1,5 +1,5 @@
 // -----------------------------------------------------------------------
-// <copyright file="ReconLineItemCollectionOperations.java" company="Microsoft">
+// <copyright file="ReconciliationLineItemCollectionOperations.java" company="Microsoft">
 //      Copyright (c) Microsoft Corporation. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
@@ -23,11 +23,11 @@ import com.microsoft.store.partnercenter.models.utils.KeyValuePair;
 import com.microsoft.store.partnercenter.utils.StringHelper;
 
 /**
- * Represents the operations that can be done on partner's recon line items.
+ * Represents the operations that can be done on partner's reconciliation line items.
  */
-public class ReconLineItemCollectionOperations 
+public class ReconciliationLineItemCollectionOperations 
     extends BasePartnerComponent<String>
-    implements IReconLineItemCollection 
+    implements IReconciliationLineItemCollection 
 {
     /**
      * The maximum page size for recon line items.
@@ -60,7 +60,7 @@ public class ReconLineItemCollectionOperations
     private BillingPeriod period;
 
 	/**
-	 * Initializes a new instance of the ReconLineItemCollectionOperations class.
+	 * Initializes a new instance of the ReconciliationLineItemCollectionOperations class.
 	 * 
 	 * @param rootPartnerOperations The root partner operations instance.
 	 * @param invoiceId The invoice identifier.
@@ -69,7 +69,7 @@ public class ReconLineItemCollectionOperations
      * @param currencyCode The currency code.
      * @param period The billing period.
 	 */
-	public ReconLineItemCollectionOperations(IPartner rootPartnerOperations, String invoiceId, BillingProvider billingProvider, InvoiceLineItemType invoiceLineItemType, String currencyCode, BillingPeriod period)
+	public ReconciliationLineItemCollectionOperations(IPartner rootPartnerOperations, String invoiceId, BillingProvider billingProvider, InvoiceLineItemType invoiceLineItemType, String currencyCode, BillingPeriod period)
 	{
         super(rootPartnerOperations, invoiceId);
 
@@ -92,7 +92,7 @@ public class ReconLineItemCollectionOperations
     }
 
     /**
-	 * Initializes a new instance of the ReconLineItemCollectionOperations class.
+	 * Initializes a new instance of the ReconciliationLineItemCollectionOperations class.
 	 * 
 	 * @param rootPartnerOperations The root partner operations instance.
 	 * @param invoiceId The invoice identifier.
@@ -102,7 +102,7 @@ public class ReconLineItemCollectionOperations
      * @param period The billing period.
      * @param pageSize The number of records returned in a single operation.
 	 */
-	public ReconLineItemCollectionOperations(IPartner rootPartnerOperations, String invoiceId, BillingProvider billingProvider, InvoiceLineItemType invoiceLineItemType, String currencyCode, BillingPeriod period, int pageSize)
+	public ReconciliationLineItemCollectionOperations(IPartner rootPartnerOperations, String invoiceId, BillingProvider billingProvider, InvoiceLineItemType invoiceLineItemType, String currencyCode, BillingPeriod period, int pageSize)
 	{
         super(rootPartnerOperations, invoiceId);
 
@@ -136,34 +136,34 @@ public class ReconLineItemCollectionOperations
 
 		parameters.add(
 			new KeyValuePair<String, String>(
-				PartnerService.getInstance().getConfiguration().getApis().get("GetReconLineItems").getParameters().get("CurrencyCode"),
+				PartnerService.getInstance().getConfiguration().getApis().get("GetReconciliationLineItems").getParameters().get("CurrencyCode"),
                 currencyCode));
         
         parameters.add(
             new KeyValuePair<String, String>(
-                PartnerService.getInstance().getConfiguration().getApis().get("GetReconLineItems").getParameters().get("InvoiceLineItemType"),
+                PartnerService.getInstance().getConfiguration().getApis().get("GetReconciliationLineItems").getParameters().get("InvoiceLineItemType"),
                 invoiceLineItemType.toString()));
 
         parameters.add(
             new KeyValuePair<String, String>(
-                PartnerService.getInstance().getConfiguration().getApis().get("GetReconLineItems").getParameters().get("Period"),
+                PartnerService.getInstance().getConfiguration().getApis().get("GetReconciliationLineItems").getParameters().get("Period"),
                 period.toString()));
 
         parameters.add(
             new KeyValuePair<String, String>(
-                PartnerService.getInstance().getConfiguration().getApis().get("GetReconLineItems").getParameters().get("Provider"),
+                PartnerService.getInstance().getConfiguration().getApis().get("GetReconciliationLineItems").getParameters().get("Provider"),
                 billingProvider.toString()));
 
         parameters.add(
             new KeyValuePair<String, String>(
-                PartnerService.getInstance().getConfiguration().getApis().get("GetReconLineItems").getParameters().get("Size"),
+                PartnerService.getInstance().getConfiguration().getApis().get("GetReconciliationLineItems").getParameters().get("Size"),
                 String.valueOf(pageSize)));
 
 		return this.getPartner().getServiceClient().get(
 			this.getPartner(),
 			new TypeReference<SeekBasedResourceCollection<InvoiceLineItem>>(){}, 
 			MessageFormat.format( 
-				PartnerService.getInstance().getConfiguration().getApis().get("GetReconLineItems").getPath(),
+				PartnerService.getInstance().getConfiguration().getApis().get("GetReconciliationLineItems").getPath(),
                 this.getContext()),
             parameters);
     }

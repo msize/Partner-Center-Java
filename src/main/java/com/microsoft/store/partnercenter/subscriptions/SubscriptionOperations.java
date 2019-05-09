@@ -29,9 +29,10 @@ public class SubscriptionOperations
     extends BasePartnerComponent<Tuple<String, String>>
     implements ISubscription
 {
-    private String customerId;
-
-    private String subscriptionId;
+    /**
+     * A reference to the current subscription's activation link operations.
+     */
+    private ISubscriptionActivationLinks subscriptionActivationLinks;
 
     /**
      * A reference to the current subscription's add-ons operations.
@@ -93,6 +94,7 @@ public class SubscriptionOperations
     public SubscriptionOperations( IPartner rootPartnerOperations, String customerId, String subscriptionId )
     {
         super( rootPartnerOperations, new Tuple<String, String>( customerId, subscriptionId ) );
+
         if ( StringHelper.isNullOrWhiteSpace( customerId ) )
         {
             throw new IllegalArgumentException( "customerId must be set." );
@@ -102,9 +104,24 @@ public class SubscriptionOperations
         {
             throw new IllegalArgumentException( "subscriptionId must be set." );
         }
+    }
 
-        this.customerId = customerId;
-        this.subscriptionId = subscriptionId;
+    /**
+     * Gets the current subscription's activation links.
+     * 
+     * @return The current subscription's activation links.
+     */
+    public ISubscriptionActivationLinks getActivationLinks()
+    {
+        if(subscriptionActivationLinks == null)
+        {
+            subscriptionActivationLinks = new SubscriptionActivationLinksOperations(
+                this.getPartner(), 
+                this.getContext().getItem1(), 
+                this.getContext().getItem2());
+        }
+
+        return subscriptionActivationLinks;
     }
 
     /**
@@ -116,7 +133,7 @@ public class SubscriptionOperations
         if ( this.subscriptionAddOnsOperations == null )
         {
             this.subscriptionAddOnsOperations =
-                new SubscriptionAddOnCollectionOperations( this.getPartner(), this.customerId, this.subscriptionId );
+                new SubscriptionAddOnCollectionOperations( this.getPartner(), this.getContext().getItem1(), this.getContext().getItem2() );
         }
 
         return this.subscriptionAddOnsOperations;
@@ -131,7 +148,7 @@ public class SubscriptionOperations
         if ( this.subscriptionUpgradeOperations == null )
         {
             this.subscriptionUpgradeOperations =
-                new SubscriptionUpgradeCollectionOperations( this.getPartner(), this.customerId, this.subscriptionId );
+                new SubscriptionUpgradeCollectionOperations( this.getPartner(), this.getContext().getItem1(), this.getContext().getItem2() );
         }
 
         return this.subscriptionUpgradeOperations;
@@ -146,7 +163,7 @@ public class SubscriptionOperations
         if ( this.usageRecordsOperations == null )
         {
             this.usageRecordsOperations =
-                new SubscriptionUsageRecordCollectionOperations( this.getPartner(), customerId, subscriptionId );
+                new SubscriptionUsageRecordCollectionOperations( this.getPartner(), this.getContext().getItem1(), this.getContext().getItem2() );
         }
 
         return this.usageRecordsOperations;
@@ -161,7 +178,7 @@ public class SubscriptionOperations
         if ( this.subscriptionUsageSummaryOperations == null )
         {
             this.subscriptionUsageSummaryOperations =
-                new SubscriptionUsageSummaryOperations( this.getPartner(), customerId, subscriptionId );
+                new SubscriptionUsageSummaryOperations( this.getPartner(), this.getContext().getItem1(), this.getContext().getItem2() );
         }
 
         return this.subscriptionUsageSummaryOperations;
@@ -176,7 +193,7 @@ public class SubscriptionOperations
         if ( this.subscriptionUtilizationOperations == null )
         {
             this.subscriptionUtilizationOperations =
-                new UtilizationCollectionOperations( this.getPartner(), customerId, subscriptionId );
+                new UtilizationCollectionOperations( this.getPartner(), this.getContext().getItem1(), this.getContext().getItem2() );
         }
 
         return this.subscriptionUtilizationOperations;

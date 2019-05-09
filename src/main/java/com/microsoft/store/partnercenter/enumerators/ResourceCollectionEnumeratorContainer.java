@@ -96,10 +96,9 @@ public class ResourceCollectionEnumeratorContainer
             this.offerEnumeratorFactory =
                 new IndexBasedCollectionEnumeratorFactory<>( 
                     this.getPartner(),
-                    new TypeReference<ResourceCollection<Offer>>()
-                    {
-                    } );
+                    new TypeReference<ResourceCollection<Offer>>(){});
         }
+        
         return this.offerEnumeratorFactory;
     }
 
@@ -115,10 +114,9 @@ public class ResourceCollectionEnumeratorContainer
             this.customerEnumeratorFactory =
                 new IndexBasedCollectionEnumeratorFactory<>( 
                     this.getPartner(),
-                    new TypeReference<SeekBasedResourceCollection<Customer>>()
-                    {
-                    } );
+                    new TypeReference<SeekBasedResourceCollection<Customer>>(){});
         }
+
         return this.customerEnumeratorFactory;
     }
 
@@ -134,10 +132,9 @@ public class ResourceCollectionEnumeratorContainer
             this.customerUserEnumeratorFactory =
                 new IndexBasedCollectionEnumeratorFactory<>( 
                     this.getPartner(),
-                    new TypeReference<SeekBasedResourceCollection<CustomerUser>>()
-                    {
-                    } );
+                    new TypeReference<SeekBasedResourceCollection<CustomerUser>>(){});
         }
+
         return this.customerUserEnumeratorFactory;
     }
     
@@ -153,9 +150,7 @@ public class ResourceCollectionEnumeratorContainer
             this.invoiceEnumeratorFactory =
                 new IndexBasedCollectionEnumeratorFactory<>( 
                     this.getPartner(),
-                    new TypeReference<ResourceCollection<Invoice>>()
-                    {
-                    } );
+                    new TypeReference<ResourceCollection<Invoice>>(){});
         }
 
         return this.invoiceEnumeratorFactory;
@@ -172,9 +167,7 @@ public class ResourceCollectionEnumeratorContainer
         {
             this.serviceRequestEnumeratorFactory =
                 new IndexBasedCollectionEnumeratorFactory<>( this.getPartner(),
-                    new TypeReference<ResourceCollection<ServiceRequest>>()
-                    {
-                    } );
+                    new TypeReference<ResourceCollection<ServiceRequest>>(){});
         }
 
         return this.serviceRequestEnumeratorFactory;
@@ -191,9 +184,7 @@ public class ResourceCollectionEnumeratorContainer
         {
             this.invoiceLineItemEnumeratorFactory =
                 new IndexBasedCollectionEnumeratorFactory<>( this.getPartner(),
-                    new TypeReference<ResourceCollection<InvoiceLineItem>>()
-                    {
-                    } );
+                    new TypeReference<ResourceCollection<InvoiceLineItem>>(){});
         }
 
         return this.invoiceLineItemEnumeratorFactory;
@@ -212,8 +203,7 @@ public class ResourceCollectionEnumeratorContainer
                 new IndexBasedCollectionEnumeratorFactory<>
                 ( 
                     this.getPartner(),
-                    new TypeReference<SeekBasedResourceCollection<AuditRecord>>(){} 
-                );
+                    new TypeReference<SeekBasedResourceCollection<AuditRecord>>(){});
         }
 
         return this.auditRecordEnumeratorFactory;
@@ -229,7 +219,7 @@ public class ResourceCollectionEnumeratorContainer
         if ( this.utilizationRecordEnumeratorContainer == null )
         {
             this.utilizationRecordEnumeratorContainer =
-                new UtilizationCollectionEnumeratorContainer( this.getPartner() );
+                new UtilizationCollectionEnumeratorContainer(this.getPartner());
         }
 
         return this.utilizationRecordEnumeratorContainer;
@@ -247,9 +237,7 @@ public class ResourceCollectionEnumeratorContainer
             this.productEnumeratorFactory =
                 new IndexBasedCollectionEnumeratorFactory<>(
                     this.getPartner(),
-                    new TypeReference<ResourceCollection<Product>>()
-                    {
-                    } );
+                    new TypeReference<ResourceCollection<Product>>(){});
         }
 
         return this.productEnumeratorFactory;
