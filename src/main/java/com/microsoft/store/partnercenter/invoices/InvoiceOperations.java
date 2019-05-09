@@ -80,9 +80,9 @@ public class InvoiceOperations
      * @param currencyCode The currency code.
      * @param period The period for unbilled recon.
      */
-	public IReconLineItemCollection By(BillingProvider provider, InvoiceLineItemType invoiceLineItemType, String currencyCode, BillingPeriod period)
+	public IReconciliationLineItemCollection By(BillingProvider provider, InvoiceLineItemType invoiceLineItemType, String currencyCode, BillingPeriod period)
 	{
-		return new ReconLineItemCollectionOperations(
+		return new ReconciliationLineItemCollectionOperations(
 			this.getPartner(), 
 			this.getContext(), 
 			provider, 
@@ -100,9 +100,9 @@ public class InvoiceOperations
      * @param period The period for unbilled recon.
      * @param pageSize The number of records returned in a single operation.
      */
-	public IReconLineItemCollection By(BillingProvider provider, InvoiceLineItemType invoiceLineItemType, String currencyCode, BillingPeriod period, int pageSize)
+	public IReconciliationLineItemCollection By(BillingProvider provider, InvoiceLineItemType invoiceLineItemType, String currencyCode, BillingPeriod period, int pageSize)
 	{
-		return new ReconLineItemCollectionOperations(
+		return new ReconciliationLineItemCollectionOperations(
 			this.getPartner(), 
 			this.getContext(), 
 			provider, 

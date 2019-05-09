@@ -101,7 +101,12 @@ public enum ResourceType
 	/**
      * The invoice resource
      */
-    INVOICE("invoice");
+    INVOICE("invoice"), 
+    
+    /**
+     * The agreement resource 
+     */
+    AGREEMENT("agreement");
 
     private final String value;
 

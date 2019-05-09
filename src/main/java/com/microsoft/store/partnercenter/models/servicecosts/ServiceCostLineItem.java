@@ -18,6 +18,256 @@ public class ServiceCostLineItem
     extends ResourceBase 
 {
     /**
+     * The availability identifier associated with this line item.
+     */
+    private String availabilityId;
+
+    /**
+     * The discount details associated with this line item.
+     */
+    private String discountDetails;
+
+    /**
+     * The invoice number associated with this line item. 
+     */
+    private String invoiceNumber;
+
+    /**
+     * The identifier of the product.
+     */
+    private String productId;
+
+    /**
+     * The name of the product.
+     */
+    private String productName;
+
+    /**
+     * The identifier of the publisher.
+     */
+    private String publisherId;
+
+    /**
+     * The name of the publisher.
+     */
+    private String publisherName;
+
+    /**
+     * The SKU identifier associated with this line item.
+     */
+    private String skuId;
+
+    /**
+     * The name of the SKU associated with this line item.
+     */
+    private String skuName;
+
+    /**
+     * The term and billing cycle associated with this line item.
+     */
+    private String termAndBillingCycle;
+
+    /**
+     * Gets the availability identifier associated with this line item.
+     * 
+     * @return The availability identifier associated with this line item.
+     */
+    public String getAvailabilityId()
+    {
+        return availabilityId;        
+    }
+
+    /**
+     * Sets the availability identifier associated with this line item.
+     * 
+     * @param value The availability identifier associated with this line item.
+     */
+    public void setAvailabilityId(String value) 
+    {
+        availabilityId = value;
+    }
+
+    /**
+     * Gets the discount details associated with this line item.
+     * 
+     * @return The discount details associated with this line item.
+     */
+    public String getDiscountDetails()
+    {
+        return discountDetails;
+    }
+
+    /**
+     * Sets the discount details associated with this line item.
+     * 
+     * @param value The discount details associated with this line item.
+     */
+    public void setDiscountDetails(String value)
+    {
+        discountDetails = value;
+    }
+
+    /**
+     * Gets the invoice number associated with this line item. 
+     * 
+     * @return The invoice number associated with this line item. 
+     */
+    public String getInvoiceNumber()
+    {
+        return invoiceNumber;
+    }
+
+    /**
+     * Sets the invoice number associated with this line item. 
+     * 
+     * @param value The invoice number associated with this line item. 
+     */
+    public void setInvoiceNumber(String value) 
+    {
+        invoiceNumber = value;
+    }
+
+    /**
+     * Gets the identifier of the product.
+     * 
+     * @return The identifier of the product.
+     */
+    public String getProductId()
+    {
+        return productId;
+    }
+
+    /**
+     * Sets the identifier of the product.
+     * 
+     * @param value The identifier of the product.
+     */
+    public void setProductId(String value)
+    {
+        productId = value;
+    }
+
+    /**
+     * Gets the name of the product.
+     * 
+     * @return The name of the product.
+     */
+    public String getProductName()
+    {
+        return productName;
+    }
+
+    /**
+     * Sets the name of the product.
+     * 
+     * @param value The name of the product.
+     */
+    public void setProductName(String value)
+    {
+        productName = value;
+    }
+
+    /**
+     * Gets the identifier of the publisher.
+     * 
+     * @return The identifier of the publisher.
+     */
+    public String getPublisherId()
+    {
+        return publisherId; 
+    }
+
+    /**
+     * Sets the identifier of the publisher.
+     * 
+     * @param value The identifier of the publisher.
+     */
+    public void setPublisherId(String value)
+    {
+        publisherId = value;
+    }
+
+    /**
+     * Gets the name of the publisher.
+     * 
+     * @return The name of the publisher.
+     */
+    public String getPublisherName()
+    {
+        return publisherName;
+    }
+
+    /**
+     * Sets the name of the publisher.
+     * 
+     * @param value The name of the publisher.
+     */
+    public void setPublisherName(String value)
+    {
+        publisherName = value;
+    }
+
+    /**
+     * Gets the SKU identifier associated with this line item.
+     * 
+     * @return The SKU identifier associated with this line item.
+     */
+    public String getSkuId()
+    {
+        return skuId;
+    }
+
+    /**
+     * Sets the SKU identifier associated with this line item.
+     * 
+     * @param value The SKU identifier associated with this line item.
+     */
+    public void setSkuId(String value)
+    {
+        skuId = value;
+    }
+
+    /**
+     * Gets the name of the SKU associated with this line item.
+     * 
+     * @return The name of the SKU associated with this line item.
+     */
+    public String getSkuName()
+    {
+        return skuName;
+    }
+
+    /**
+     * Sets the name of the SKU associated with this line item.
+     * 
+     * @param value The name of the SKU associated with this line item.
+     */
+    public void setSkuName(String value)
+    {
+        skuName = value;
+    }
+
+    /**
+     * Gets the term and billing cycle associated with this line item.
+     * 
+     * @return The term and billing cycle associated with this line item.
+     */
+    public String getTermAndBillingCycle()
+    {
+        return termAndBillingCycle;
+    }
+
+    /**
+     * Sets the term and billing cycle associated with this line item.
+     * 
+     * @param value The term and billing cycle associated with this line item.
+     */
+    public void setTermAndBillingCycle(String value)
+    {
+        termAndBillingCycle = value;
+    }
+
+    /**
      * Gets or sets the start date for the charge.
      */
 	@JsonProperty( "startDate" )

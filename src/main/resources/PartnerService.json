@@ -355,8 +355,11 @@
     "GetActivationLinksByLineItemNumber": {
       "Path": "customers/{0}/orders/{1}/lineitems/{2}/activationlinks"
     },
+    "GetOrderActivationLinks": {
+      "Path": "customers/{0}/orders/{1}/activationlinks"
+    },
     "GetSubscriptionActivationLink": {
-      "Path": "{0}/subscriptions/{1}/activationlinks"
+      "Path": "customers/subscriptions/{1}/activationlinks"
     },
     "GetCustomerQualification": {
       "Path": "customers/{0}/qualification"
@@ -517,7 +520,7 @@
     "GetInvoiceSummaries": {
       "Path": "invoices/summaries"
     },
-    "GetReconLineItems": {
+    "GetReconciliationLineItems": {
       "Path": "invoices/{0}/lineitems",
       "Parameters": {
         "Provider": "provider",
