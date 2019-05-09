@@ -41,10 +41,12 @@ public class SubscriptionCollectionOperations
 	public SubscriptionCollectionOperations( IPartner rootPartnerOperations, String customerId )
 	{
 		super( rootPartnerOperations, customerId );
+		
 		if ( StringHelper.isNullOrWhiteSpace( customerId ) )
 		{
 			throw new IllegalArgumentException( "customerId must be set" );
 		}
+
 		usageRecords = new SubscriptionMonthlyUsageRecordCollectionOperations( this.getPartner(), this.getContext() );
 	}
 

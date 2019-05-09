@@ -1,10 +1,12 @@
 // -----------------------------------------------------------------------
-// <copyright file="ServiceCostLineItem.java" company="Microsoft">
+// <copyright file="ServiceCostsSummary.java" company="Microsoft">
 //      Copyright (c) Microsoft Corporation. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
 
 package com.microsoft.store.partnercenter.models.servicecosts;
+
+import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.microsoft.store.partnercenter.models.ResourceBaseWithLinks;
@@ -17,6 +19,31 @@ import org.joda.time.DateTime;
 public class ServiceCostsSummary 
     extends ResourceBaseWithLinks<ServiceCostsSummaryLinks> 
 {
+    /**
+     * The service costs summary details.
+     */
+    private List<ServiceCostLineItem> details;
+
+    /**
+     * Gets the service costs summary details.
+     * 
+     * @return The service costs summary details.
+     */
+    public List<ServiceCostLineItem> getDetails()
+    {
+        return details;
+    }
+
+    /**
+     * Sets the service costs summary details.
+     * 
+     * @param value The service costs summary details.
+     */
+    public void setDetails(List<ServiceCostLineItem> value) 
+    {
+        details = value;;
+    }
+
     /**
      * Gets or sets the start of the billing period.
      */

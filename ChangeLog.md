@@ -20,12 +20,29 @@
 
 # Change Log
 
-## Upcoming Release
+## 1.13.0
 
 * Auditing
+  * Added the CREATE_AGREEMENT operation type
   * Renamed the operation type CREATE_INVOICE to READY_INVOICE
 * Cart
   * Added the add-on items property to the *CartLineItem* model
+* Orders
+  * Added the ability to get activation links for order line items
+* Service Costs
+  * Added the following properties to the *ServiceCostLineItem* model
+    * AvailabilityId
+    * DiscountDetails
+    * InvoiceNumber
+    * ProductId
+    * ProductName
+    * PublisherId
+    * PublisherName
+    * SkuId
+    * SkuName
+    * TermAndBillingCycle
+* Subscriptions
+  * Added the ability to get subscription activation links
 
 ## Version 1.12.0
 

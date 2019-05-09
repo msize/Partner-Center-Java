@@ -359,7 +359,7 @@
       "Path": "customers/{0}/orders/{1}/activationlinks"
     },
     "GetSubscriptionActivationLink": {
-      "Path": "customers/subscriptions/{1}/activationlinks"
+      "Path": "customers/{0}/subscriptions/{1}/activationlinks"
     },
     "GetCustomerQualification": {
       "Path": "customers/{0}/qualification"

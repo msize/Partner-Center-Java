@@ -23,6 +23,13 @@ public interface ISubscription
     IEntityPatchOperations<Subscription>
 {
     /**
+     * Gets the current subscription's activation links.
+     * 
+     * @return The current subscription's activation links.
+     */
+    ISubscriptionActivationLinks getActivationLinks();
+
+    /**
      * Gets the current subscription's add-ons operations.
      * 
      * @return The current subscription's add-ons operations.
