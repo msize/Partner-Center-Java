@@ -22,7 +22,6 @@ public class ResourceAttributes
         {
             this.setObjectType( type.getSimpleName() );
         }
-
     }
 
     /**

@@ -6,65 +6,96 @@
 
 package com.microsoft.store.partnercenter.models;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
  * Represents API failures.
  */
 public class ApiFault
     extends ResourceBase
 {
-    protected ApiFault()
+    /**
+     * The error code returned by the API.
+     */
+    @JsonProperty("code")    
+    private String errorCode;
+    
+    /**
+     * Additional fault information regarding the error.
+     */
+    @JsonProperty("data")
+    private Iterable<Object> errorData;
 
+    /**
+     * The error message returned by the API.
+     */
+    @JsonProperty("description")    
+    private String errorMessage;
+
+    /**
+     * Initializes a new instance of the ApiFault class.
+     */
+    protected ApiFault()
     {
         super();
     }
 
-    protected ApiFault( String objectType )
-
-    {
-        super( objectType );
-    }
-
     /**
-     * Gets or sets the error code.
+     * Gets the error code.
+     * 
+     * @return The error code.
      */
-    private String errorCode;
-
     public String getErrorCode()
     {
         return errorCode;
     }
 
-    public void setErrorCode( String value )
+    /**
+     * Sets the error code.
+     * 
+     * @param value The error code.
+     */
+    public void setErrorCode(String value)
     {
         errorCode = value;
     }
 
     /**
-     * Gets or sets the error message.
+     * Gets the error message.
+     * 
+     * @return The error message.
      */
-    private String errorMessage;
-
     public String getErrorMessage()
     {
         return errorMessage;
     }
 
-    public void setErrorMessage( String value )
+    /**
+     * Sets the error message.
+     * 
+     * @param value The error message.
+     */
+    public void setErrorMessage(String value)
     {
         errorMessage = value;
     }
 
     /**
-     * Gets or sets the error data.
+     * Gets the additional fault information if present.
+     * 
+     * @return The additional fault information if present.
      */
-    private Iterable<Object> errorData;
-
     public Iterable<Object> getErrorData()
     {
         return errorData;
     }
 
-    public void setErrorData( Iterable<Object> value )
+    /**
+     * Sets the additional fault information. 
+     * 
+     * @param value The additional fault information.
+     */
+    public void setErrorData(Iterable<Object> value)
     {
         errorData = value;
     }

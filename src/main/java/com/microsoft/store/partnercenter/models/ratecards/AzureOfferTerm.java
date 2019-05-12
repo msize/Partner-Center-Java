@@ -74,5 +74,4 @@ public class AzureOfferTerm extends ResourceBase
     {
     	__EffectiveDate = value;
     }
-
 }

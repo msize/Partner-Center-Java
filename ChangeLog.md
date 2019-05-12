@@ -20,6 +20,11 @@
 
 # Change Log
 
+## Upcoming Release
+
+* Error Handling
+  * Addressed issue with the errors not being deserialized correctly
+
 ## 1.13.0
 
 * Auditing
