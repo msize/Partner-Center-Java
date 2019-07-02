@@ -1,6 +1,6 @@
 # Partner Center Java SDK
 
-![Build Status](https://dev.azure.com/partnercenter/sdk/_apis/build/status/partner-center-java-CI)
+![Build status](https://dev.azure.com/partnercenter/sdk/_apis/build/status/partner-center-java-CI)
 
 [![Maven Central](https://img.shields.io/maven-central/v/com.microsoft.store/partnercenter.svg?label=Maven%20Central)](https://search.maven.org/search?q=g:%22com.microsoft.store%22%20AND%20a:%22partnercenter%22) [![GitHub issues](https://img.shields.io/github/issues/Microsoft/Partner-Center-Java.svg)](https://github.com/Microsoft/Partner-Center-Java/issues/) [![GitHub pull-requests](https://img.shields.io/github/issues-pr/Microsoft/Partner-Center-Java.svg)](https://gitHub.com/Microsoft/Partner-Center-Java/pull/)
 
@@ -14,7 +14,7 @@ Jar dependency binary information for maven and gradle can be found here at [mav
 <dependency>
     <groupId>com.microsoft.store</groupId>
     <artifactId>partnercenter</artifactId>
-    <version>1.13.2</version>
+    <version>1.13.4</version>
 </dependency>
 ```
 
@@ -45,5 +45,3 @@ mvn clean package
 ## Related Projects
 
 [Partner Center Java SDK Samples](https://github.com/Microsoft/Partner-Center-Java-Samples) - Sample console application that demonstrates the supported scenarios of this SDK.
-
-[Partner Center .NET SDK Samples](https://github.com/PartnerCenterSamples/Partner-Center-SDK-Samples) - Sample console application that demonstrates the supported scenarios of the Partner Center .NET SDK.
