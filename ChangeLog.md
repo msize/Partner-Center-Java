@@ -23,7 +23,7 @@
 ## 1.13.6
 
 * Agreements
-  * Added the the Microsoft Customer Agreement type
+  * Added the Microsoft Customer Agreement type
   * Added logic to ignore unknown agreement types
 * Azure utilization records
   * Changed the type for the resourceUri property from URI to String
