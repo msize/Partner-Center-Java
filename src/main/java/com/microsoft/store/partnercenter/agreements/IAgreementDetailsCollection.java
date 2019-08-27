@@ -12,9 +12,17 @@ import com.microsoft.store.partnercenter.models.agreements.AgreementMetaData;
 public interface IAgreementDetailsCollection
 {
     /**
-     * Retrieves all current agreement metadata.
+     *  Gets the agreement details.
      *
      * @return The current agreement metadata.
      */
     ResourceCollection<AgreementMetaData> get();
+
+    /**
+     *  Gets the agreement details.
+     *
+     * @param agreementType The agreement type used to filter.
+     * @return The current agreement metadata.
+     */
+    ResourceCollection<AgreementMetaData> get(String agreementType);
 }

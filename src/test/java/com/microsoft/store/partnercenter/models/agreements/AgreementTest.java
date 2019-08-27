@@ -97,7 +97,7 @@ class AgreementTest
     @Test
     void getType()
     {
-        AgreementType type = AgreementType.MICROSOFT_CLOUD_AGREEMENT;
+        String type = "MICROSOFT_CUSTOMER_AGREEMENT";
 
         agreement.setType(type);
 

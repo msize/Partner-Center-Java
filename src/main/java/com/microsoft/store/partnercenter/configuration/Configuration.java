@@ -11,7 +11,7 @@ import java.util.Map;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * A configuration holder that keeps a map of API's and some default configuration values
+ * A configuration holder that keeps a map of APIs and some default configuration values
  */
 public class Configuration
 {

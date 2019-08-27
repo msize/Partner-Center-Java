@@ -24,7 +24,6 @@ import com.microsoft.store.partnercenter.models.query.IQuery;
 import com.microsoft.store.partnercenter.models.query.QueryType;
 import com.microsoft.store.partnercenter.models.users.CustomerUser;
 import com.microsoft.store.partnercenter.models.utils.KeyValuePair;
-import com.microsoft.store.partnercenter.utils.ParameterValidator;
 import com.microsoft.store.partnercenter.utils.StringHelper;
 
 public class CustomerUsersCollectionOperations 

@@ -5,7 +5,7 @@
   "DefaultAuthenticationTokenExpiryBufferInSeconds": "30",
   "DefaultLocale": "en-US",
   "PartnerCenterClient": "Partner Center Java SDK",
-  "SdkVersion": "1.13.7",
+  "SdkVersion": "2.0.0",
   "Apis": {
     "PartnerLicensesDeploymentInsights": {
       "Path": "analytics/licenses/deployment"
@@ -29,13 +29,19 @@
       }
     },
     "GetAgreementsDetails": {
-      "Path": "agreements"
+      "Path": "agreements",
+      "Parameters": {
+        "AgreementType": "agreementType"
+      }
     },
     "CreateCustomerAgreement": {
       "Path": "customers/{0}/agreements"
     },
     "GetCustomerAgreements": {
-      "Path": "customers/{0}/agreements"
+      "Path": "customers/{0}/agreements",
+      "Parameters": {
+        "AgreementType": "agreementType"
+      }
     },
     "CreateCustomerApplicationConsent": {
       "Path": "customers/{0}/applicationconsents"

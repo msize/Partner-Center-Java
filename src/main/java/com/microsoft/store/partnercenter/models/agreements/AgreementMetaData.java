@@ -3,73 +3,106 @@
 
 package com.microsoft.store.partnercenter.models.agreements;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 /**
- * The AgreementMetaData provides metadata about the agreement type
- * that partner can provide confirmation of customer acceptance.
+ * Represents the meta data about agreements.
  */
 public class AgreementMetaData
 {
     /**
-     * Gets or sets the unique identifier of an agreement template.
+     * The download link for the agreement.
      */
-    @JsonProperty("templateId")
-    private String templateId;
-
-    public String getTemplateId()
-    {
-        return templateId;
-    }
-
-    public void setTemplateId(String value)
-    {
-        templateId = value;
-    }
-
-    /**
-     * Gets or sets agreement type.
-     */
-    @JsonProperty("agreementType")
-    private AgreementType agreementType;
-
-    public AgreementType getAgreementType()
-    {
-        return agreementType;
-    }
-
-    public void setAgreementType(AgreementType value)
-    {
-        agreementType = value;
-    }
-
-    /**
-     * Gets or sets URL to the agreement template.
-     */
-    @JsonProperty("agreementLink")
     private String agreementLink;
 
+    /**
+     * The type of agreement.
+     */
+    private String agreementType;
+
+    /**
+     * The template identifier for the agreement.
+     */
+    private String templateId;
+
+    /**
+     * The ranking for the version enforcement.
+     */
+    private int versionRank;
+
+    /**
+     * Gets the download link for the agreement.
+     * 
+     * @return The download link for the agreement.
+     */
     public String getAgreementLink()
     {
         return agreementLink;
     }
 
+    /**
+     * Sets the download link for the agreement.
+     * 
+     * @param value The download link for the agreement.
+     */
     public void setAgreementLink(String value)
     {
         agreementLink = value;
     }
 
     /**
-     * Gets or sets the version rank of an agreement template.
+     * Gets the agreement type.
+     * 
+     * @return The type of agreement.
      */
-    @JsonProperty("versionRank")
-    private int versionRank;
+    public String getAgreementType()
+    {
+        return agreementType;
+    }
 
+    /**
+     * Sets the agreement type. 
+     * 
+     * @param value The type of agreement.
+     */
+    public void setAgreementType(String value)
+    {
+        agreementType = value;
+    }
+
+    /**
+     * Gets the template identifier for the agreement.
+     * 
+     * @return The template identifier for the agreement.
+     */
+    public String getTemplateId()
+    {
+        return templateId;
+    }
+
+    /**
+     * Sets the template identifier for the agreement.
+     * 
+     * @param value The template identifier for the agreement.
+     */
+    public void setTemplateId(String value)
+    {
+        templateId = value;
+    }
+
+    /**
+     * Gets the ranking for the version enforcement.
+     * 
+     * @return The ranking for the version enforcement.
+     */
     public int getVersionRank()
     {
         return versionRank;
     }
 
+    /**
+     * Sets the ranking for the version enforcement.
+     * 
+     * @param value The ranking for the version enforcement.
+     */
     public void setVersionRank(int value)
     {
         versionRank = value;

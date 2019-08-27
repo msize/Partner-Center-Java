@@ -4,6 +4,8 @@
 package com.microsoft.store.partnercenter.agreements;
 
 import java.text.MessageFormat;
+import java.util.ArrayList;
+import java.util.Collection;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.microsoft.store.partnercenter.BasePartnerComponentString;
@@ -11,6 +13,7 @@ import com.microsoft.store.partnercenter.IPartner;
 import com.microsoft.store.partnercenter.PartnerService;
 import com.microsoft.store.partnercenter.models.ResourceCollection;
 import com.microsoft.store.partnercenter.models.agreements.Agreement;
+import com.microsoft.store.partnercenter.models.utils.KeyValuePair;
 import com.microsoft.store.partnercenter.utils.StringHelper;
 
 /**
@@ -37,16 +40,15 @@ public class CustomerAgreementCollectionOperations
     }
 
     /**
-     * Adds accepted agreement.
+     * Creates an agreement between the partner and customer.
      *
-     * @param newAgreement Agreement to add.
-     *
-     * @return Agreement entity.
+     * @param newEntity The agreement to be created.
+     * @return The newly created agreement.
      */
     @Override
-    public Agreement create(Agreement newAgreement)
+    public Agreement create(Agreement newEntity)
     {
-        if (newAgreement == null)
+        if (newEntity == null)
         {
             throw new IllegalArgumentException("Agreement can't be null.");
         }
@@ -57,13 +59,13 @@ public class CustomerAgreementCollectionOperations
             MessageFormat.format(
                 PartnerService.getInstance().getConfiguration().getApis().get("CreateCustomerAgreement").getPath(),
                 this.getContext()),
-            newAgreement);
+            newEntity);
     }
 
     /**
-     * Retrieves all agreements.
+     * Gets the list of agreements between a partner and customer.
      *
-     * @return A collection of all agreements.
+     * @return The list of the customer's agreements.
      */
     @Override
     public ResourceCollection<Agreement> get()
@@ -74,5 +76,34 @@ public class CustomerAgreementCollectionOperations
             MessageFormat.format(
                 PartnerService.getInstance().getConfiguration().getApis().get("GetCustomerAgreements").getPath(),
                 this.getContext()));
+    }
+
+    /**
+     * Gets the list of agreements between a partner and customer.
+     *
+     * @param agreementType The agreement type used to filter.
+     * @return The list of the customer's agreements.
+     */
+    @Override
+    public ResourceCollection<Agreement> get(String agreementType)
+    {
+        Collection<KeyValuePair<String, String>> parameters = new ArrayList<KeyValuePair<String, String>>();
+        
+        parameters.add
+        (
+            new KeyValuePair<String, String>
+            (
+                PartnerService.getInstance().getConfiguration().getApis().get("GetCustomerAgreements").getParameters().get("AgreementType"),
+                agreementType
+            ) 
+        );
+        
+        return this.getPartner().getServiceClient().get(
+            this.getPartner(), 
+            new TypeReference<ResourceCollection<Agreement>>(){},
+            MessageFormat.format(
+                PartnerService.getInstance().getConfiguration().getApis().get("GetCustomerAgreements").getPath(),
+                this.getContext()),
+            parameters);
     }
 }
