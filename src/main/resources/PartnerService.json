@@ -221,6 +221,13 @@
         "subscriptionId": "subscriptionId"
       }
     },
+    "Activate3ppSubscription": {
+      "Path": "customers/{0}/subscriptions/{1}/activate",
+      "Parameters": {
+        "customerId": "customerId",
+        "subscriptionId": "subscriptionId"
+      }
+    },
     "CreateCustomer": {
       "Path": "customers"
     },

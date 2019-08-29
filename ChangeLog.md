@@ -25,11 +25,10 @@
 * Agreements
   * Added the ability to request the Microsoft Customer Agreement
   * Removed the *AgreementType* and updated the *Agreement* and *AgreementMetaData* models to use a string for the type properties
-
-## 1.13.7
-
 * Customer users
   * Addressed issue [#39](https://github.com/microsoft/Partner-Center-Java/issues/39) preventing sorting from working as expected when querying customer users
+* Subscriptions
+  * Added the ability to activate third-party subscriptions in the integration sandbox
 * Usage
   * Replaced the id and name properties with the resourceId and resourceName properties respectively
 

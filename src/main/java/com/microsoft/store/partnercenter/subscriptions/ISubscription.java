@@ -7,6 +7,7 @@ import com.microsoft.store.partnercenter.IPartnerComponent;
 import com.microsoft.store.partnercenter.genericoperations.IEntityGetOperations;
 import com.microsoft.store.partnercenter.genericoperations.IEntityPatchOperations;
 import com.microsoft.store.partnercenter.models.subscriptions.Subscription;
+import com.microsoft.store.partnercenter.models.subscriptions.SubscriptionActivationResult;
 import com.microsoft.store.partnercenter.models.utils.Tuple;
 import com.microsoft.store.partnercenter.usage.ISubscriptionUsageRecordCollection;
 import com.microsoft.store.partnercenter.usage.ISubscriptionUsageSummary;
@@ -19,6 +20,13 @@ public interface ISubscription
     extends IPartnerComponent<Tuple<String, String>>, IEntityGetOperations<Subscription>,
     IEntityPatchOperations<Subscription>
 {
+    /**
+     * Activates a third-party subscription.
+     * 
+     * @return The result from the subscription activation.
+     */
+    SubscriptionActivationResult activate();
+
     /**
      * Gets the current subscription's activation links.
      * 
