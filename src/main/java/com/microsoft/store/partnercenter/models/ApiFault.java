@@ -140,11 +140,11 @@ public class ApiFault
         {
             apiFaultDescription.append("Error data:\n");
 
-            for (Object errorData : this.getErrorData())
+            for (Object item : this.getErrorData())
             {
-                if (errorData != null)
+                if (item != null)
                 {
-                    apiFaultDescription.append(errorData + "\n");
+                    apiFaultDescription.append(item + "\n");
                 }
             }
         }

@@ -25,8 +25,16 @@
 * Agreements
   * Added the ability to request the Microsoft Customer Agreement
   * Removed the *AgreementType* and updated the *Agreement* and *AgreementMetaData* models to use a string for the type properties
+* Auditing
+  * The *Id* function in the *AuditRecord* class has been renamed to *getId*
 * Customer users
   * Addressed issue [#39](https://github.com/microsoft/Partner-Center-Java/issues/39) preventing sorting from working as expected when querying customer users
+* Dependencies
+  * Updated the *com.microsoft.rest.client-runtime* from version 1.6.5 to 1.6.12
+* Invoices
+  * Both functions named By in the invoice operations class have been renamed to by
+* Network
+  * Increased the default authentication token expiry buffer from 30 seconds to 120 seconds
 * Subscriptions
   * Added the ability to activate third-party subscriptions in the integration sandbox
 * Usage

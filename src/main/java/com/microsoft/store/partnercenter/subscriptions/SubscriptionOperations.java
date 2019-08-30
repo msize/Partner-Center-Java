@@ -111,13 +111,14 @@ public class SubscriptionOperations
      */
     public SubscriptionActivationResult activate()
     {
-        return this.getPartner().getServiceClient().get(
+        return this.getPartner().getServiceClient().post(
             this.getPartner(),
             new TypeReference<SubscriptionActivationResult>(){}, 
             MessageFormat.format(
                 PartnerService.getInstance().getConfiguration().getApis().get("Activate3ppSubscription").getPath(),
                 this.getContext().getItem1(), 
-                this.getContext().getItem2()));
+                this.getContext().getItem2()), 
+            null);
     }
 
     /**
