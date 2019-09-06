@@ -10,6 +10,7 @@ import com.microsoft.store.partnercenter.BasePartnerComponent;
 import com.microsoft.store.partnercenter.IPartner;
 import com.microsoft.store.partnercenter.PartnerService;
 import com.microsoft.store.partnercenter.models.subscriptions.Subscription;
+import com.microsoft.store.partnercenter.models.subscriptions.SubscriptionActivationResult;
 import com.microsoft.store.partnercenter.models.utils.Tuple;
 import com.microsoft.store.partnercenter.usage.ISubscriptionUsageRecordCollection;
 import com.microsoft.store.partnercenter.usage.ISubscriptionUsageSummary;
@@ -101,6 +102,23 @@ public class SubscriptionOperations
         {
             throw new IllegalArgumentException("subscriptionId must be set.");
         }
+    }
+
+    /**
+     * Activates a third-party subscription.
+     * 
+     * @return The result from the subscription activation.
+     */
+    public SubscriptionActivationResult activate()
+    {
+        return this.getPartner().getServiceClient().post(
+            this.getPartner(),
+            new TypeReference<SubscriptionActivationResult>(){}, 
+            MessageFormat.format(
+                PartnerService.getInstance().getConfiguration().getApis().get("Activate3ppSubscription").getPath(),
+                this.getContext().getItem1(), 
+                this.getContext().getItem2()), 
+            null);
     }
 
     /**

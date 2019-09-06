@@ -4,6 +4,8 @@
 package com.microsoft.store.partnercenter.agreements;
 
 import java.text.MessageFormat;
+import java.util.ArrayList;
+import java.util.Collection;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.microsoft.store.partnercenter.BasePartnerComponentString;

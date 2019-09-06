@@ -1,8 +1,5 @@
-// ----------------------------------------------------------------
-// <copyright file="DailyRatedUsageLineItem.java" company="Microsoft Corporation">
 // Copyright (c) Microsoft Corporation. All rights reserved.
-// </copyright>
-// ----------------------------------------------------------------
+// Licensed under the MIT license. See the LICENSE file in the project root for full license information.
 
 package com.microsoft.store.partnercenter.models.invoices;
 

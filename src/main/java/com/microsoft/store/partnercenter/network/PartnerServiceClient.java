@@ -32,6 +32,7 @@ import com.microsoft.store.partnercenter.errorhandling.IFailedPartnerServiceResp
 import com.microsoft.store.partnercenter.exception.PartnerErrorCategory;
 import com.microsoft.store.partnercenter.exception.PartnerException;
 import com.microsoft.store.partnercenter.exception.PartnerResponseParseException;
+import com.microsoft.store.partnercenter.logging.PartnerLog;
 import com.microsoft.store.partnercenter.models.Link;
 import com.microsoft.store.partnercenter.models.entitlements.Artifact;
 import com.microsoft.store.partnercenter.models.invoices.InvoiceLineItem;
@@ -249,7 +250,7 @@ public class PartnerServiceClient
 		} 
 		catch (IOException ex) 
 		{
-			ex.printStackTrace();
+			PartnerLog.getInstance().logError(ex.getLocalizedMessage());
 		}
 	   
 		return null;

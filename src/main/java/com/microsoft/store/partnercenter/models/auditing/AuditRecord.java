@@ -3,7 +3,6 @@
 
 package com.microsoft.store.partnercenter.models.auditing;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.microsoft.store.partnercenter.models.ResourceBase;
 import com.microsoft.store.partnercenter.models.utils.KeyValuePair;
 
@@ -15,10 +14,69 @@ import org.joda.time.DateTime;
 public class AuditRecord extends ResourceBase 
 {
 	/**
-	 *  Gets or sets the id of the app invoking the operation
+	 *  The identifier of the application invoking the operation.
 	 */
-	@JsonProperty("applicationid")
 	private String applicationId;
+
+	/**
+	 * The identifier of customer in whose context operation was performed.
+	 */
+	private String customerId;
+
+	/**
+	 * The name of customer in whose context operation was performed.
+	 */
+	private String customerName;
+
+	/**
+	 * The dictionary which holds additional data that is customized to the operation performed.
+	 */
+	private Iterable<KeyValuePair<String, String>> customizedData;
+
+	/**
+	 * The unique identifier for the audit record.
+	 */
+	private String id;
+
+	/**
+	 * The date and time when the operation was performed.
+	 */
+	private DateTime operationDate;
+
+	/**
+	 * The status of the operation that is audited.
+	 */
+	private OperationStatus operationStatus;
+
+	/**
+	 * The type of the operation being performed.
+	 */
+	private OperationType operationType;
+
+	/**
+	 * The identifier of the partner that performed the operation.
+	 */
+	private String partnerId;
+
+	/**
+	 * The new value of the resource.
+	 */
+	private String resourceNewValue;
+	
+	/**
+	 * The old value of the resource.
+	 */
+	private String resourceOldValue;
+
+	/**
+	 * The type of the resource acted upon by the operation.
+	 */
+	private ResourceType resourceType;
+
+	/**
+	 * The identifier of the user who performed the operation. This could be in the context of application.
+	 */
+	private String userPrincipalName;
 
 	/**
      * Gets the identifier of the application invoking the operation.
@@ -40,9 +98,6 @@ public class AuditRecord extends ResourceBase
 		applicationId = value;
 	}
 
-	@JsonProperty("customizedData")
-	private Iterable<KeyValuePair<String, String>> customizedData;
-
 	/**
      * Gets the dictionary which holds additional data that is customized to the operation performed.
      * 
@@ -62,9 +117,6 @@ public class AuditRecord extends ResourceBase
 	{
 		customizedData = value;
 	}
-
-	@JsonProperty("customerId")
-	private String customerId;
 
 	/**
      * Gets the identifier of customer in whose context operation was performed.
@@ -86,9 +138,6 @@ public class AuditRecord extends ResourceBase
 		customerId = value;
 	}
 
-	@JsonProperty("customerName")
-	private String customerName;
-
 	/**
      * Gets the name of customer in whose context operation was performed.
      * 
@@ -109,15 +158,12 @@ public class AuditRecord extends ResourceBase
 		customerName = value;
 	}
 
-	@JsonProperty("id")
-	public String id; 
-
 	/**
      * Gets the unique identifier for the audit record.
      * 
      * @return The unique identifier for the audit record.
      */
-	public String Id()
+	public String getId()
 	{
 		return id;
 	}
@@ -131,12 +177,6 @@ public class AuditRecord extends ResourceBase
 	{
 		id = value;
 	}
-
-	/**
-	 * Gets or sets the date time when the operation was performed
-	 */
-	@JsonProperty("operationDate")
-	private DateTime operationDate;
 
 	/**
      * Gets the date and time when the operation was performed.
@@ -158,9 +198,6 @@ public class AuditRecord extends ResourceBase
 		operationDate = value;
 	}
 
-	@JsonProperty("operationStatus")
-	private OperationStatus operationStatus;
-
 	/**
      * Gets the status of the operation that is audited.
      * 
@@ -180,9 +217,6 @@ public class AuditRecord extends ResourceBase
 	{
 		operationStatus = value;
 	}
-
-	@JsonProperty("operationType")
-	private OperationType operationType;
 
 	/**
      * Gets the type of the operation being performed.
@@ -204,9 +238,6 @@ public class AuditRecord extends ResourceBase
 		operationType = value;
 	}
 
-	@JsonProperty("partnerId")
-	private String partnerId;
-
 	/**
      * Gets the identifier of the partner that performed the operation.
      * 
@@ -226,9 +257,6 @@ public class AuditRecord extends ResourceBase
 	{
 		partnerId = value;
 	}
-
-	@JsonProperty("resourceNewValue")
-	private String resourceNewValue;
 
 	/**
      * Gets the new value of the resource.
@@ -250,9 +278,6 @@ public class AuditRecord extends ResourceBase
 		resourceNewValue = value;
 	}
 
-	@JsonProperty("resourceOldValue")
-	private String resourceOldValue;
-
 	/**
      * Gets the old value of the resource.
      * 
@@ -273,9 +298,6 @@ public class AuditRecord extends ResourceBase
 		resourceOldValue = value;
 	}
 
-	@JsonProperty("resourceType")
-	private ResourceType resourceType;
-
 	/**
      * Gets the type of the resource acted upon by the operation.
      * 
@@ -295,9 +317,6 @@ public class AuditRecord extends ResourceBase
 	{
 		resourceType = value;
 	}
-
-	@JsonProperty("userPrincipalName")
-	private String userPrincipalName;
 
 	/**
      * Gets the identifier of the user who performed the operation. This could be in the context of application.

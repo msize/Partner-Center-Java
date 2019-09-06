@@ -16,7 +16,7 @@ import com.microsoft.store.partnercenter.models.invoices.InvoiceLineItemType;
 import com.microsoft.store.partnercenter.utils.StringHelper;
 
 /**
- * Operations available for the reseller's invoice.
+ * Implements the operations that can be performed on the reseller's invoice.
  */
 public class InvoiceOperations
 	extends BasePartnerComponentString
@@ -77,7 +77,7 @@ public class InvoiceOperations
      * @param currencyCode The currency code.
      * @param period The period for unbilled recon.
      */
-	public IReconciliationLineItemCollection By(BillingProvider provider, InvoiceLineItemType invoiceLineItemType, String currencyCode, BillingPeriod period)
+	public IReconciliationLineItemCollection by(BillingProvider provider, InvoiceLineItemType invoiceLineItemType, String currencyCode, BillingPeriod period)
 	{
 		return new ReconciliationLineItemCollectionOperations(
 			this.getPartner(), 
@@ -97,7 +97,7 @@ public class InvoiceOperations
      * @param period The period for unbilled recon.
      * @param pageSize The number of records returned in a single operation.
      */
-	public IReconciliationLineItemCollection By(BillingProvider provider, InvoiceLineItemType invoiceLineItemType, String currencyCode, BillingPeriod period, int pageSize)
+	public IReconciliationLineItemCollection by(BillingProvider provider, InvoiceLineItemType invoiceLineItemType, String currencyCode, BillingPeriod period, int pageSize)
 	{
 		return new ReconciliationLineItemCollectionOperations(
 			this.getPartner(), 

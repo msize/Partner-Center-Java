@@ -3,13 +3,16 @@
 
 package com.microsoft.store.partnercenter.agreements;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.microsoft.store.partnercenter.BasePartnerComponentString;
 import com.microsoft.store.partnercenter.IPartner;
 import com.microsoft.store.partnercenter.PartnerService;
 import com.microsoft.store.partnercenter.models.ResourceCollection;
 import com.microsoft.store.partnercenter.models.agreements.AgreementMetaData;
-import com.microsoft.store.partnercenter.models.agreements.AgreementType;
+import com.microsoft.store.partnercenter.models.utils.KeyValuePair;
 
 /**
  * Agreement details collection operations implementation class.
