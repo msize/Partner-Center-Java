@@ -3,14 +3,16 @@
 
 package com.microsoft.store.partnercenter.extensions;
 
-import java.net.URI;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
+import java.util.Collections;
+import java.util.concurrent.CompletableFuture;
 
-import com.microsoft.aad.adal4j.AuthenticationContext;
-import com.microsoft.aad.adal4j.AuthenticationResult;
-import com.microsoft.aad.adal4j.ClientCredential;
+import com.microsoft.aad.msal4j.ClientCredentialFactory;
+import com.microsoft.aad.msal4j.ClientCredentialParameters;
+import com.microsoft.aad.msal4j.ConfidentialClientApplication;
+import com.microsoft.aad.msal4j.ConfidentialClientApplication.Builder;
+import com.microsoft.aad.msal4j.IAuthenticationResult;
+import com.microsoft.aad.msal4j.IClientCredential;
+import com.microsoft.aad.msal4j.IConfidentialClientApplication;
 import com.microsoft.store.partnercenter.AuthenticationToken;
 import com.microsoft.store.partnercenter.IPartnerCredentials;
 import com.microsoft.store.partnercenter.PartnerService;
@@ -22,11 +24,10 @@ import com.microsoft.store.partnercenter.utils.StringHelper;
 import org.joda.time.DateTime;
 
 /**
- * Partner service credentials based on Azure Active Directory application credentials.
+ * Partner service credentials based on Azure Active Directory application
+ * credentials.
  */
-public class ApplicationPartnerCredentials
-    extends BasePartnerCredentials
-{
+public class ApplicationPartnerCredentials extends BasePartnerCredentials {
     /**
      * The Azure Active Directory application secret.
      */
@@ -40,47 +41,44 @@ public class ApplicationPartnerCredentials
     /**
      * Initializes a new instance of the ApplicationPartnerCredentials class.
      * 
-     * @param aadApplicationId The application identifier in Azure Active Directory.
+     * @param aadApplicationId     The application identifier in Azure Active
+     *                             Directory.
      * @param aadApplicationSecret The application secret in Azure Active Directory.
      * @param aadApplicationDomain The application domain in Azure Active Directory.
      */
-    public ApplicationPartnerCredentials(String aadApplicationId, String aadApplicationSecret, String aadApplicationDomain)
-    {
-        this(aadApplicationId, aadApplicationSecret, aadApplicationDomain, "https://login.microsoftonline.com", "https://graph.windows.net");
+    public ApplicationPartnerCredentials(String aadApplicationId, String aadApplicationSecret,
+            String aadApplicationDomain) {
+        this(aadApplicationId, aadApplicationSecret, aadApplicationDomain, "https://login.microsoftonline.com",
+                "https://graph.windows.net");
     }
 
     /**
      * Initializes a new instance of the ApplicationPartnerCredentials class.
      * 
-     * @param aadApplicationId The application identifier in Azure Active Directory.
+     * @param aadApplicationId     The application identifier in Azure Active
+     *                             Directory.
      * @param aadApplicationSecret The application secret in Azure Active Directory.
      * @param aadApplicationDomain The application domain in Azure Active Directory.
      * @param aadAuthorityEndpoint The Active Directory authority endpoint address.
-     * @param graphApiEndpoint The Azure Active Graph API endpoint address.
+     * @param graphApiEndpoint     The Azure Active Graph API endpoint address.
      */
     public ApplicationPartnerCredentials(String aadApplicationId, String aadApplicationSecret,
-                                          String aadApplicationDomain, String aadAuthorityEndpoint,
-                                          String graphApiEndpoint)
-    {
+            String aadApplicationDomain, String aadAuthorityEndpoint, String graphApiEndpoint) {
         super(aadApplicationId);
 
-        if (StringHelper.isNullOrWhiteSpace(aadApplicationSecret))
-        {
+        if (StringHelper.isNullOrWhiteSpace(aadApplicationSecret)) {
             throw new IllegalArgumentException("aadApplicationSecret has to be set");
         }
 
-        if (StringHelper.isNullOrWhiteSpace(aadApplicationDomain))
-        {
+        if (StringHelper.isNullOrWhiteSpace(aadApplicationDomain)) {
             throw new IllegalArgumentException("aadApplicationDomain has to be set");
         }
 
-        if (StringHelper.isNullOrWhiteSpace(aadAuthorityEndpoint))
-        {
+        if (StringHelper.isNullOrWhiteSpace(aadAuthorityEndpoint)) {
             throw new IllegalArgumentException("aadAuthorityEndpoint has to be set");
         }
 
-        if (StringHelper.isNullOrWhiteSpace(graphApiEndpoint))
-        {
+        if (StringHelper.isNullOrWhiteSpace(graphApiEndpoint)) {
             throw new IllegalArgumentException("graphApiEndpoint has to be set");
         }
 
@@ -89,7 +87,7 @@ public class ApplicationPartnerCredentials
 
         this.setActiveDirectoryAuthority(aadAuthorityEndpoint);
         this.setGraphApiEndpoint(graphApiEndpoint);
-        
+
         PartnerService.getInstance().setRefreshCredentialsHandler(this);
     }
 
@@ -100,8 +98,7 @@ public class ApplicationPartnerCredentials
      * 
      * @return The Active Directory authentication endpoint
      */
-    public String getActiveDirectoryAuthority()
-    {
+    public String getActiveDirectoryAuthority() {
         return activeDirectoryAuthority;
     }
 
@@ -110,8 +107,7 @@ public class ApplicationPartnerCredentials
      * 
      * @param value The Active Directory authentication endpoint.
      */
-    public void setActiveDirectoryAuthority(String value)
-    {
+    public void setActiveDirectoryAuthority(String value) {
         activeDirectoryAuthority = value;
     }
 
@@ -122,8 +118,7 @@ public class ApplicationPartnerCredentials
      * 
      * @return The Graph API endpoint.
      */
-    public String getGraphApiEndpoint()
-    {
+    public String getGraphApiEndpoint() {
         return graphApiEndpoint;
     }
 
@@ -132,8 +127,7 @@ public class ApplicationPartnerCredentials
      * 
      * @param value The Graph API endpoint
      */
-    public void setGraphApiEndpoint(String value)
-    {
+    public void setGraphApiEndpoint(String value) {
         graphApiEndpoint = value;
     }
 
@@ -143,44 +137,42 @@ public class ApplicationPartnerCredentials
      * @param requestContext The request context.
      */
     @Override
-    public void authenticate(IRequestContext requestContext)
+    public void authenticate(IRequestContext requestContext) 
     {
-        AuthenticationResult authResult = null;
-        ExecutorService service = null;
+        Builder builder;
+        ClientCredentialParameters parameters;
+        CompletableFuture<IAuthenticationResult> future;
+        IAuthenticationResult authResult = null;
+        IClientCredential credential;
+        IConfidentialClientApplication app;
 
         try
         {
-            URI activeDirectoryEndpoint = new URI(this.getActiveDirectoryAuthority() + this.aadApplicationDomain);
-            service = Executors.newFixedThreadPool(1);
+            credential = ClientCredentialFactory.create(applicationSecret);
 
-            AuthenticationContext authenticationContext =
-                new AuthenticationContext(activeDirectoryEndpoint.toString(), false, service);
-
-            if (null != requestContext)
+            builder = ConfidentialClientApplication
+                .builder(getClientId(), credential)
+                .authority(this.getActiveDirectoryAuthority() + this.aadApplicationDomain);
+                
+            if(requestContext != null)
             {
-                authenticationContext.setCorrelationId(requestContext.getCorrelationId().toString());
+                builder = builder.correlationId(requestContext.getCorrelationId().toString());
             }
 
-            ClientCredential clientCred = new ClientCredential(this.getClientId(), this.applicationSecret);
+            app = builder.build();
 
-            Future<AuthenticationResult> future =
-                authenticationContext.acquireToken(this.getGraphApiEndpoint(), clientCred, null);
+            parameters = ClientCredentialParameters
+                .builder(Collections.singleton(getGraphApiEndpoint() + "/.default")).build();
 
+            future = app.acquireToken(parameters);
             authResult = future.get();
         }
         catch (Exception e)
         {
             throw new PartnerException("Failed to do the application AAD login", e);
         }
-        finally
-        {
-            if(service != null)
-            {
-               service.shutdown();
-            }
-        }
-
-        this.setAADToken(new AuthenticationToken(authResult.getAccessToken(), new DateTime(authResult.getExpiresOnDate())));
+        
+        this.setAADToken(new AuthenticationToken(authResult.accessToken(), new DateTime(authResult.expiresOnDate())));
     }
 
     /**
