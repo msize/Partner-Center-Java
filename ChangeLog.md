@@ -29,6 +29,8 @@
   * The *Id* function in the *AuditRecord* class has been renamed to *getId*
 * Authentication
   * Transitioned from [ADAL](https://github.com/AzureAD/azure-activedirectory-library-for-java) to [MSAL](https://github.com/AzureAD/microsoft-authentication-library-for-java)
+* Configuration
+  * Resolved issue [#80](https://github.com/microsoft/Partner-Center-Java/issues/80) by ensuring that all buffers and streams are closed correctly.
 * Customer users
   * Addressed issue [#39](https://github.com/microsoft/Partner-Center-Java/issues/39) preventing sorting from working as expected when querying customer users
 * Dependencies
