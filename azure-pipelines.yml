@@ -1,31 +1,35 @@
+strategy:
+  matrix:
+    linux:
+      imageName: 'ubuntu-16.04'
+    mac:
+      imageName: 'macos-10.13'
+    windows:
+      imageName: 'Windows-2019'
+
 trigger:
 - master
 
 pool:
-  vmImage: 'ubuntu-latest'
+  vmImage: $(imageName)
+
+variables:
+  LoggingOptions: '-Dorg.slf4j.simpleLogger.defaultLogLevel=error -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn'
 
 steps:
 - task: Maven@3
+  displayName: 'package'
   inputs:
     mavenPomFile: 'pom.xml'
-    mavenOptions: '-Xmx3072m'
-    javaHomeOption: 'JDKVersion'
-    jdkVersionOption: '1.8'
-    jdkArchitectureOption: 'x64'
-    publishJUnitResults: true
-    testResultsFiles: '**/surefire-reports/TEST-*.xml'
     goals: 'package'
-
-- task: CopyFiles@2
-  displayName: 'Copy Files to: $(build.artifactstagingdirectory)'
-  inputs:
-    SourceFolder: '$(system.defaultworkingdirectory)'
-    Contents: '**/*.jar'
-    TargetFolder: '$(build.artifactstagingdirectory)'
-  condition: succeededOrFailed()
+    options: 'javadoc:aggregate -DpackageOutputDirectory=$(Build.ArtifactStagingDirectory)" -am'
+    mavenOptions: '$(LoggingOptions)'
+    publishJUnitResults: true 
+    testResultsFiles: '**/surefire-reports/TEST-*.xml'
+    findBugsRunAnalysis: true
 
 - task: PublishBuildArtifacts@1
   displayName: 'Publish Artifact: drop'
   inputs:
-    PathtoPublish: '$(build.artifactstagingdirectory)'
-  condition: succeededOrFailed()
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+  condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
