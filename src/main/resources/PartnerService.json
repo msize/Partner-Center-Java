@@ -5,7 +5,7 @@
   "DefaultAuthenticationTokenExpiryBufferInSeconds": "120",
   "DefaultLocale": "en-US",
   "PartnerCenterClient": "Partner Center Java SDK",
-  "SdkVersion": "1.14.1",
+  "SdkVersion": "1.15.0-preview",
   "Apis": {
     "PartnerLicensesDeploymentInsights": {
       "Path": "analytics/licenses/deployment"
@@ -729,6 +729,18 @@
       "AdditionalHeaders": {
         "Version": "version"
       }
+    },
+    "GetAzureEntitlements": {
+      "Path": "customers/{0}/subscriptions/{1}/azureEntitlements"
+    },
+    "GetProductUpgradeEligibility": {
+      "Path": "productUpgrades/eligibility"
+    },
+    "UpgradeProduct": {
+      "Path": "productUpgrades"
+    },
+    "GetProductUpgradeStatus": {
+      "Path": "productUpgrades/{0}/status"
     }
   }
 }
