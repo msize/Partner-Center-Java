@@ -23,6 +23,13 @@
 ## 1.15.0
 
 * Invoicing
+  * [Daily Rated Usage Line Item](https://github.com/microsoft/Partner-Center-Java/blob/master/src/main/java/com/microsoft/store/partnercenter/models/invoices/DailyRatedUsageLineItem.java)
+    * Added the *EntitlementId*, *EntitlementDescription*, *PCToBCExchangeRate*, *PCToBCExchangeRateDate*, *EffectiveUnitPrice*, and *RateOfPartnerEarnedCredit* properties
+    * Modified the type for the *AdditionalInfo* and *Tags* properties from string to *Dictionary<string, string>*
+  * [One Time Invoice Line Item](https://github.com/microsoft/Partner-Center-Java/blob/master/src/main/java/com/microsoft/store/partnercenter/models/invoices/OneTimeInvoiceLineItem.java)
+    * Added the *BillableQuantity*, *MeterDescription*, *PCToBCExchangeRateDate*, *PCToBCExchangeRate*, *PriceAdjustmentDescription*, and *PricingCurrency* properties
+* Usage
+  * Added the ability to obtain usage information for the Azure Plan
 
 ## 1.14.1
 
