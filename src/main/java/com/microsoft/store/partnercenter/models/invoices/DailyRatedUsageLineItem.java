@@ -20,8 +20,7 @@ public class DailyRatedUsageLineItem
     /**
      * The service-specific metadata. For example, an image type for a virtual machine.
      */
-    @JsonDeserialize(using = NestedResourceDeserializer.class)
-    private Map<String, Object> additionalInfo;
+    private String additionalInfo;
 
     /**
      * The availability identifier associated with the invoice line item.
@@ -279,7 +278,7 @@ public class DailyRatedUsageLineItem
      * 
      * @return The service-specific metadata. For example, an image type for a virtual machine.
      */
-    public Map<String, Object> getAdditionalInfo()
+    public String getAdditionalInfo()
     {
         return additionalInfo;
     }
@@ -289,7 +288,7 @@ public class DailyRatedUsageLineItem
      * 
      * @param value The service-specific metadata. For example, an image type for a virtual machine.
     */
-    public void setAdditionalInfo(Map<String, Object> value)
+    public void setAdditionalInfo(String value)
     {
         additionalInfo = value;
     }
